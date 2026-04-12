@@ -5,222 +5,181 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0,user-scalable=yes">
 <title>四郎带你探索 · 腾格里沙漠</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Noto+Serif+SC:wght@200;300;400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@200;300;400;600;700;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#0c0c0c;--bg2:#111;--bg3:#161616;
-  --text:#e8e4de;--text2:#a09a90;--text3:#6b655c;
-  --acc:#c8b78e;--acc2:#a89870;--acc3:#8a7d62;
-  --line:rgba(200,183,142,.08);--line2:rgba(200,183,142,.15);
-}
-::selection{background:rgba(200,183,142,.25);color:var(--text)}
+:root{--bg:#1a1510;--bg2:#211c14;--gold:#d4a853;--gold2:#f0d89a;--sand:#e8dcc8;--sand2:#c4b08a;--text:#f5efe3;--text2:#bfb49e;--dim:#8a7e6a}
 html{scroll-behavior:smooth}
-body{font-family:'Noto Serif SC',serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.8;font-weight:300}
+body{font-family:'Noto Serif SC',serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.8}
 
-/* ── Loader ── */
-.ld{position:fixed;inset:0;background:var(--bg);z-index:10000;display:flex;align-items:center;justify-content:center;transition:opacity 1s,visibility 1s}
+/* Loader */
+.ld{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 1s,visibility 1s}
 .ld.out{opacity:0;visibility:hidden}
-.ld-inner{text-align:center}
-.ld-name{font-family:'Playfair Display',serif;font-size:14px;color:var(--acc);letter-spacing:10px;font-weight:400}
-.ld-line{width:40px;height:.5px;background:var(--line2);margin:20px auto 0;position:relative;overflow:hidden}
-.ld-line::after{content:'';position:absolute;left:-100%;width:100%;height:100%;background:var(--acc);animation:ldSlide 2s ease infinite}
-@keyframes ldSlide{0%{left:-100%}100%{left:100%}}
+.ld-t{font-family:'Ma Shan Zheng',cursive;font-size:32px;color:var(--gold2);letter-spacing:6px;text-shadow:0 0 40px rgba(212,168,83,.3)}
+.ld-s{font-size:10px;letter-spacing:8px;color:var(--dim);margin-top:6px}
+.ld-bar{width:60px;height:1px;background:rgba(212,168,83,.15);margin-top:20px;border-radius:1px;overflow:hidden}
+.ld-bar i{display:block;width:100%;height:100%;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:shine 2s ease infinite}
+@keyframes shine{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 
-/* ── Nav ── */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 28px;display:flex;justify-content:space-between;align-items:center;mix-blend-mode:difference;transition:opacity .4s}
-.nav-brand{font-family:'Playfair Display',serif;font-size:11px;letter-spacing:6px;color:var(--acc);font-weight:400}
-.nav-menu{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:4px;color:var(--text2);font-weight:400}
-
-/* ── Hero ── */
+/* Hero */
 .hero{position:relative;height:100vh;min-height:100dvh;overflow:hidden}
-.hero-bg{position:absolute;inset:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0;animation:heroReveal 3s ease forwards;animation-delay:.5s}
-@keyframes heroReveal{to{opacity:1}}
-.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,12,12,.5) 0%,transparent 30%,transparent 50%,rgba(12,12,12,.7) 80%,var(--bg) 100%)}
-.hero-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:0 28px 16vh;z-index:2}
-.hero-eyebrow{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:6px;color:var(--acc2);text-transform:uppercase;margin-bottom:20px;font-weight:400}
-.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(48px,15vw,110px);font-weight:400;color:var(--text);letter-spacing:-.02em;line-height:.95;margin-bottom:20px}
-.hero-h1 em{font-style:italic;color:var(--acc);font-weight:400}
-.hero-sub{font-size:clamp(13px,3vw,16px);color:var(--text2);font-weight:300;letter-spacing:.5px;line-height:1.8;max-width:360px}
-.hero-sub i{font-style:normal;color:var(--acc)}
-.hero-down{position:absolute;bottom:4vh;left:50%;transform:translateX(-50%);z-index:2}
-.hero-down svg{width:16px;height:16px;stroke:var(--text3);stroke-width:1;fill:none;animation:bob 3s ease infinite}
-@keyframes bob{0%,100%{transform:translateY(0);opacity:.3}50%{transform:translateY(6px);opacity:.7}}
+.hero-bg{position:absolute;inset:-20px}
+.hero-bg img{width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;filter:brightness(.35) saturate(1.3) contrast(1.1)}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,21,16,.3) 0%,transparent 25%,transparent 40%,rgba(26,21,16,.6) 75%,var(--bg) 100%)}
+.hero-c{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:0 28px 14vh;text-align:center;z-index:2}
+.hero-badge{font-size:10px;letter-spacing:8px;color:var(--gold);border:1px solid rgba(212,168,83,.2);padding:6px 20px;border-radius:20px;margin-bottom:24px;font-weight:300;backdrop-filter:blur(8px);background:rgba(26,21,16,.3)}
+.hero-title{font-family:'Ma Shan Zheng',cursive;font-size:clamp(56px,16vw,100px);color:var(--text);letter-spacing:8px;text-shadow:0 4px 60px rgba(212,168,83,.15);line-height:1.1}
+.hero-sub{font-size:clamp(13px,3.2vw,16px);color:var(--text2);font-weight:200;letter-spacing:3px;margin-top:16px;line-height:2.2;max-width:400px}
+.hero-sub em{font-style:normal;color:var(--gold)}
+.hero-scroll{position:absolute;bottom:4vh;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.35}
+.hero-scroll span{font-size:8px;letter-spacing:6px;color:var(--sand2)}
+.hero-scroll i{width:1px;height:28px;background:linear-gradient(var(--sand2),transparent);animation:float 3s ease infinite}
+@keyframes float{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-6px);opacity:.8}}
 
-/* ── Section Common ── */
-.s{padding:72px 28px}
-.s-label{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:5px;color:var(--acc3);text-transform:uppercase;font-weight:400;margin-bottom:16px}
-.s-h{font-family:'Playfair Display',serif;font-size:clamp(24px,6vw,38px);font-weight:400;color:var(--text);letter-spacing:-.01em;line-height:1.3;margin-bottom:20px}
-.s-h em{font-style:italic;color:var(--acc)}
-.s-rule{width:32px;height:.5px;background:var(--line2);margin-bottom:28px}
-.s-body{font-size:clamp(13px,3vw,15px);color:var(--text2);line-height:2.2;letter-spacing:.3px;max-width:460px}
-.s-body strong{color:var(--text);font-weight:400}
+/* Section */
+.sec{padding:56px 28px}
+.sec-tag{font-size:9px;letter-spacing:6px;color:var(--gold);font-weight:300}
+.sec-title{font-family:'Ma Shan Zheng',cursive;font-size:clamp(26px,6vw,38px);color:var(--text);letter-spacing:3px;margin-top:8px}
+.sec-line{width:30px;height:1px;background:var(--gold);margin:14px 0 0;opacity:.5;border-radius:1px}
+.sec-body{font-size:clamp(13px,3vw,15px);line-height:2.5;color:var(--text2);font-weight:300;letter-spacing:.5px;margin-top:20px;max-width:500px}
+.sec-body strong{color:var(--text);font-weight:400}
 
-/* ── Full Bleed Image ── */
-.fb{width:100%;position:relative;overflow:hidden}
-.fb img{width:100%;display:block;object-fit:cover}
-.fb-cap{position:absolute;bottom:0;left:0;right:0;padding:20px 28px 14px;background:linear-gradient(transparent,rgba(12,12,12,.6))}
-.fb-cap span{font-family:'Inter',sans-serif;font-size:8px;letter-spacing:5px;color:var(--acc3);font-weight:400}
-.fb-short{height:40vh;min-height:220px}
-.fb-med{height:55vh;min-height:300px}
-.fb-tall{height:65vh;min-height:360px}
+/* Quote */
+.quote{padding:64px 28px;text-align:center;position:relative}
+.quote-mark{font-family:'Ma Shan Zheng',cursive;font-size:80px;color:rgba(212,168,83,.06);line-height:1;margin-bottom:8px}
+.quote-text{font-size:clamp(15px,3.8vw,19px);line-height:2.8;color:var(--text);font-weight:300;letter-spacing:1px;max-width:460px;margin:0 auto}
+.quote-text strong{color:var(--gold2);font-weight:400}
+.quote-from{margin-top:16px;font-size:10px;color:var(--dim);letter-spacing:4px}
 
-/* ── Quote ── */
-.q{padding:80px 28px;text-align:center;position:relative}
-.q::before{content:'\201C';position:absolute;top:24px;left:50%;transform:translateX(-50%);font-family:'Playfair Display',serif;font-size:120px;color:rgba(200,183,142,.04);line-height:1}
-.q-text{font-size:clamp(16px,4vw,22px);line-height:2.8;color:var(--text);font-weight:300;letter-spacing:.5px;max-width:480px;margin:0 auto}
-.q-text strong{color:var(--acc);font-weight:400}
-.q-sig{margin-top:20px;font-family:'Inter',sans-serif;font-size:9px;letter-spacing:5px;color:var(--text3)}
+/* Image Break */
+.ib{width:100%;height:45vh;min-height:240px;overflow:hidden;position:relative}
+.ib img{width:100%;height:130%;object-fit:cover;position:absolute;bottom:0;filter:saturate(1.2) contrast(1.05)}
+.ib-ov{position:absolute;inset:0;background:linear-gradient(var(--bg) 0%,transparent 15%,transparent 85%,var(--bg) 100%)}
+.ib-poem{position:absolute;bottom:24px;left:28px;right:28px;font-size:12px;color:rgba(245,239,227,.5);font-weight:300;letter-spacing:1px;line-height:2;z-index:2;font-style:italic}
 
-/* ── Timeline ── */
-.tl{max-width:420px;margin:0 auto}
-.tl-item{display:grid;grid-template-columns:80px 1fr;gap:0 20px;padding:20px 0;border-bottom:.5px solid var(--line);opacity:0;transform:translateY(12px);transition:all .7s cubic-bezier(.22,1,.36,1)}
-.tl-item.vis{opacity:1;transform:translateY(0)}
-.tl-item:last-child{border-bottom:none}
-.tl-time{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:3px;color:var(--acc3);padding-top:2px;font-weight:400}
-.tl-body .tl-ev{font-size:14px;color:var(--text);font-weight:400;letter-spacing:.5px;margin-bottom:4px}
-.tl-body .tl-d{font-size:12px;color:var(--text3);line-height:2;font-weight:300}
+/* Timeline */
+.tl{max-width:440px;margin:32px auto 0;position:relative;padding-left:1px}
+.tl::before{content:'';position:absolute;left:15px;top:12px;bottom:12px;width:1px;background:linear-gradient(to bottom,var(--gold),rgba(212,168,83,.05))}
+.tl-i{position:relative;padding-left:44px;margin-bottom:32px;opacity:0;transform:translateY(16px);transition:all .8s cubic-bezier(.22,1,.36,1)}
+.tl-i.vis{opacity:1;transform:translateY(0)}
+.tl-dot{position:absolute;left:10px;top:6px;width:11px;height:11px;border-radius:50%;border:2px solid var(--gold);background:var(--bg);box-shadow:0 0 0 3px rgba(212,168,83,.08)}
+.tl-i .t-time{font-size:9px;color:var(--gold);letter-spacing:4px;font-weight:300;margin-bottom:3px}
+.tl-i .t-ev{font-size:15px;font-weight:600;color:var(--text);letter-spacing:1px;margin-bottom:3px}
+.tl-i .t-d{font-size:12px;color:var(--dim);font-weight:300;line-height:2.2}
 
-/* ── Stats ── */
-.stats{display:flex;gap:1px;padding:0 28px;margin:0 28px;background:var(--line);border-radius:2px;overflow:hidden}
-.stat{flex:1;background:var(--bg);padding:32px 12px;text-align:center;opacity:0;transform:scale(.95);transition:all .6s ease-out}
-.stat.vis{opacity:1;transform:scale(1)}
-.stat-n{font-family:'Playfair Display',serif;font-size:clamp(30px,9vw,44px);color:var(--text);font-weight:400;letter-spacing:-.02em;line-height:1}
-.stat-l{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:4px;color:var(--text3);margin-top:8px;font-weight:400}
+/* Stats */
+.stats{display:flex;gap:16px;padding:44px 28px}
+.stat{flex:1;text-align:center;padding:28px 8px;background:var(--bg2);border:1px solid rgba(212,168,83,.08);border-radius:12px;opacity:0;transform:translateY(12px);transition:all .7s ease-out}
+.stat.vis{opacity:1;transform:translateY(0)}
+.stat-n{font-family:'Ma Shan Zheng',cursive;font-size:clamp(32px,9vw,48px);color:var(--gold);line-height:1}
+.stat-l{font-size:10px;color:var(--dim);letter-spacing:4px;margin-top:6px}
 
-/* ── Gallery ── */
+/* Gallery */
 .gal{padding:0}
-.gal-item{position:relative;overflow:hidden}
-.gal-item img{width:100%;display:block;transition:transform 1s cubic-bezier(.22,1,.36,1)}
-.gal-full{height:60vh;min-height:320px}
-.gal-full img{height:100%;object-fit:cover}
-.gal-pair{display:grid;grid-template-columns:1fr 1fr;gap:2px}
-.gal-pair .gal-item{height:40vh;min-height:200px}
-.gal-pair img{height:100%;object-fit:cover}
-.gal-info{position:absolute;bottom:0;left:0;right:0;padding:24px 28px 20px;background:linear-gradient(transparent,rgba(12,12,12,.8));opacity:0;transform:translateY(8px);transition:all .5s}
-.gal-item:hover .gal-info,.gal-item:active .gal-info{opacity:1;transform:translateY(0)}
-.gal-info .gi-tag{font-family:'Inter',sans-serif;font-size:8px;letter-spacing:4px;color:var(--acc2);font-weight:400;margin-bottom:8px}
-.gal-info .gi-t{font-size:clamp(15px,4vw,18px);color:var(--text);font-weight:400;letter-spacing:1px;margin-bottom:4px}
-.gal-info .gi-p{font-size:11px;color:var(--text2);line-height:2;font-weight:300;max-width:400px}
-.gal-info .gi-a{font-family:'Inter',sans-serif;font-size:8px;color:var(--acc3);letter-spacing:4px;margin-top:8px;font-weight:400}
+.gal-head{padding:0 28px 28px}
+.gal-item{position:relative;overflow:hidden;margin-bottom:4px}
+.gal-item img{width:100%;display:block;object-fit:cover;transition:transform .8s}
+.gal-full{height:55vh;min-height:280px}
+.gal-full img{height:100%}
+.gal-duo{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.gal-duo .gal-item{height:38vh;min-height:180px}
+.gal-duo img{height:100%}
+.gal-ov{position:absolute;inset:0;background:linear-gradient(0deg,rgba(26,21,16,.85) 0%,rgba(26,21,16,.15) 35%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:24px 24px 20px}
+.gal-tag{font-size:8px;letter-spacing:5px;color:var(--gold);opacity:.7;font-weight:300;margin-bottom:8px}
+.gal-title{font-family:'Ma Shan Zheng',cursive;font-size:clamp(18px,4.5vw,22px);color:var(--text);letter-spacing:2px}
+.gal-poem{font-size:12px;color:var(--text2);font-weight:300;letter-spacing:.5px;line-height:2.2;margin-top:6px;max-width:380px}
+.gal-from{font-size:9px;color:var(--dim);letter-spacing:4px;margin-top:8px}
 
-/* Mobile: always show caption */
-@media(max-width:767px){
-  .gal-info{opacity:1;transform:translateY(0)}
-}
+/* Scenic */
+.sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:0 28px}
+.sc-card{position:relative;border-radius:8px;overflow:hidden}
+.sc-card.tall{grid-row:span 2;border-radius:12px}
+.sc-card img{width:100%;height:100%;object-fit:cover;display:block;min-height:140px;filter:brightness(.85) saturate(1.15)}
+.sc-ov{position:absolute;inset:0;background:linear-gradient(0deg,rgba(26,21,16,.75) 0%,transparent 45%);display:flex;align-items:flex-end;padding:16px}
+.sc-text{font-size:11px;color:var(--text2);font-weight:300;letter-spacing:.5px;line-height:1.8;font-style:italic}
 
-/* ── Scenic Grid ── */
-.sc{padding:72px 28px;background:var(--bg3)}
-.sc-head{text-align:center;margin-bottom:32px}
-.sc-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:2px}
-.sc-card{position:relative;overflow:hidden}
-.sc-card img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.9) contrast(1.05)}
-.sc-card.tall{grid-row:span 2}
-.sc-card .sc-i{position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(transparent,rgba(12,12,12,.7))}
-.sc-card .sc-i span{font-size:11px;color:var(--text2);font-weight:300;letter-spacing:.3px;line-height:1.7;font-style:italic}
+/* Explore */
+.exp{padding:64px 28px;text-align:center;background:linear-gradient(var(--bg),#0f0c08);position:relative;overflow:hidden}
+.exp::before{content:'';position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,83,.04),transparent 70%);top:-200px;left:50%;transform:translateX(-50%)}
+.exp-title{font-family:'Ma Shan Zheng',cursive;font-size:clamp(30px,8vw,44px);color:var(--text);letter-spacing:4px}
+.exp-title em{font-style:normal;color:var(--gold)}
+.exp-body{font-size:clamp(13px,3vw,15px);line-height:2.6;color:var(--dim);font-weight:300;margin-top:20px;max-width:400px;margin-left:auto;margin-right:auto;letter-spacing:.5px}
+.exp-body strong{color:var(--text2);font-weight:400}
+.exp-btn{display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-size:10px;letter-spacing:5px;color:var(--gold);border:1px solid rgba(212,168,83,.2);padding:10px 24px;border-radius:20px;font-weight:300}
+.exp-btn svg{width:12px;height:12px;fill:var(--gold)}
 
-/* ── Explore ── */
-.exp{position:relative;padding:96px 28px;text-align:center;overflow:hidden}
-.exp-bg{position:absolute;inset:0}
-.exp-bg img{width:100%;height:100%;object-fit:cover;opacity:.08;filter:grayscale(1)}
-.exp>*{position:relative;z-index:1}
-.exp-ic{width:40px;height:40px;margin:0 auto 24px;border:.5px solid var(--line2);display:flex;align-items:center;justify-content:center}
-.exp-ic svg{width:16px;height:16px;stroke:var(--acc2);stroke-width:1;fill:none}
-.exp-t{font-family:'Playfair Display',serif;font-size:clamp(28px,7vw,40px);color:var(--text);font-weight:400;letter-spacing:-.01em}
-.exp-t em{font-style:italic;color:var(--acc)}
-.exp-d{font-size:clamp(13px,3vw,15px);line-height:2.6;color:var(--text3);font-weight:300;max-width:400px;margin:24px auto 0;letter-spacing:.3px}
-.exp-d strong{color:var(--text2);font-weight:400}
-.exp-cta{display:inline-flex;align-items:center;gap:10px;margin-top:32px;font-family:'Inter',sans-serif;font-size:9px;letter-spacing:5px;color:var(--acc2);padding:12px 28px;border:.5px solid var(--line2);transition:all .3s;font-weight:400}
-.exp-cta:active{background:rgba(200,183,142,.05)}
-.exp-cta svg{width:12px;height:12px;stroke:var(--acc2);stroke-width:1;fill:none}
+/* Night Poem */
+.night{padding:64px 28px;text-align:center;background:#0f0c08}
+.np{font-family:'Ma Shan Zheng',cursive;font-size:clamp(18px,4.5vw,24px);line-height:3;color:var(--text2);letter-spacing:2px;margin-top:28px}
+.np em{font-style:normal;color:var(--gold)}
 
-/* ── Night ── */
-.night{padding:72px 28px;text-align:center;background:linear-gradient(var(--bg),var(--bg2))}
-.np{font-size:clamp(15px,3.8vw,18px);line-height:3;color:var(--text2);font-weight:300;letter-spacing:1px;margin-top:32px;max-width:420px;margin-left:auto;margin-right:auto}
-.np em{font-style:italic;color:var(--acc);font-weight:400}
+/* Closing */
+.cls{padding:80px 28px 88px;text-align:center}
+.cls-text{font-size:clamp(16px,4vw,20px);font-weight:300;color:var(--text2);letter-spacing:2px;line-height:2.6}
+.cls-text em{font-style:normal;color:var(--gold)}
+.cls-dot{width:5px;height:5px;border:1px solid var(--gold);border-radius:50%;margin:28px auto 0;opacity:.3}
+.cls-sig{font-size:10px;color:var(--dim);letter-spacing:5px;margin-top:16px}
 
-/* ── Closing ── */
-.cls{padding:88px 28px 96px;text-align:center}
-.cls-t{font-family:'Playfair Display',serif;font-size:clamp(20px,5vw,28px);color:var(--text);font-weight:400;letter-spacing:.5px;line-height:2.2}
-.cls-t em{font-style:italic;color:var(--acc)}
-.cls-rule{width:24px;height:.5px;background:var(--line2);margin:32px auto 0}
-.cls-sig{font-family:'Inter',sans-serif;font-size:8px;letter-spacing:6px;color:var(--text3);margin-top:16px}
+/* Footer */
+.ft{padding:20px 28px;text-align:center;border-top:1px solid rgba(212,168,83,.06)}
+.ft-brand{font-family:'Ma Shan Zheng',cursive;font-size:14px;color:var(--gold);letter-spacing:6px;opacity:.5;margin-bottom:6px}
+.ft-sub{font-size:9px;color:var(--dim);letter-spacing:3px}
 
-/* ── Footer ── */
-.ft{padding:20px 28px 24px;display:flex;justify-content:space-between;align-items:center;border-top:.5px solid var(--line)}
-.ft-brand{font-family:'Playfair Display',serif;font-size:10px;letter-spacing:5px;color:var(--acc3);font-weight:400}
-.ft-copy{font-family:'Inter',sans-serif;font-size:8px;letter-spacing:3px;color:var(--text3)}
-
-/* ── FI ── */
-.fi{opacity:0;transform:translateY(16px);transition:all .9s cubic-bezier(.22,1,.36,1)}
+/* FI */
+.fi{opacity:0;transform:translateY(18px);transition:all .9s cubic-bezier(.22,1,.36,1)}
 .fi.vis{opacity:1;transform:translateY(0)}
 .fi-d1{transition-delay:.1s}.fi-d2{transition-delay:.2s}.fi-d3{transition-delay:.3s}
 
 @media(min-width:768px){
-  .s{padding:96px 12%}
-  .stats{max-width:460px;margin:0 auto}
-  .gal-full{height:70vh}
-  .gal-pair .gal-item{height:50vh}
-  .sc{padding:96px 12%}
+  .sec{padding:80px 12%}
+  .gal-full{height:65vh}
+  .gal-duo .gal-item{height:45vh}
   .sc-grid{max-width:560px;margin:0 auto}
 }
 </style>
 </head>
 <body>
 
-<!-- LOADER -->
 <div class="ld" id="ld">
-  <div class="ld-inner">
-    <div class="ld-name">SILANG</div>
-    <div class="ld-line"></div>
-  </div>
+  <div class="ld-t">四郎带你探索</div>
+  <div class="ld-s">TENGGRI DESERT</div>
+  <div class="ld-bar"><i></i></div>
 </div>
 
-<!-- NAV -->
-<nav class="nav">
-  <div class="nav-brand">SILANG</div>
-  <div class="nav-menu">TENGGRI · 2026</div>
-</nav>
-
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-bg">
-    <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1600&q=80" alt="腾格里沙漠">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1600&q=80" alt="腾格里"></div>
+  <div class="hero-ov"></div>
+  <div class="hero-c">
+    <div class="hero-badge">四郎带你探索</div>
+    <h1 class="hero-title">腾格里</h1>
+    <p class="hero-sub">三天两夜 · 五十公里沙海跋涉<br><em>风起沙海，行者无疆</em></p>
   </div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">四郎带你探索 · The Tengger Desert</div>
-    <h1 class="hero-h1"><em>Tengger</em></h1>
-    <p class="hero-sub">三天两夜，五十公里沙海。<br>没有信号，没有路标，只有风、沙和头顶的银河。<br><i>有些路，只有走过才知道。</i></p>
-  </div>
-  <div class="hero-down">
-    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-  </div>
+  <div class="hero-scroll"><span>SCROLL</span><i></i></div>
 </section>
 
-<!-- QUOTE -->
-<section class="q fi">
-  <p class="q-text">
+<section class="quote fi">
+  <div class="quote-mark">"</div>
+  <p class="quote-text">
     所有的旅行，都是一次向内的跋涉。<br>
+    腾格里的沙，不问来路，不问归途，<br>
     它只教你一件事——<br>
     <strong>安静地走，路会自己出现。</strong>
   </p>
-  <p class="q-sig">四郎 · 写在出发前</p>
+  <p class="quote-from">—— 四郎 · 写在出发前</p>
 </section>
 
-<!-- IMAGE BREAK -->
-<div class="fb fb-short">
+<div class="ib">
   <img src="https://images.unsplash.com/photo-1489493887464-892be6d1daae?w=1400&q=80" alt="沙纹" loading="lazy">
-  <div class="fb-cap"><span>THE TEXTURE OF SILENCE</span></div>
+  <div class="ib-ov"></div>
+  <div class="ib-poem">风留下的指纹，是沙漠最温柔的语言</div>
 </div>
 
-<!-- PROLOGUE -->
-<section class="s">
+<section class="sec">
   <div class="fi">
-    <div class="s-label">Prologue · 序</div>
-    <div class="s-h">大漠孤烟，<br>长河<em>落日</em></div>
-    <div class="s-rule"></div>
+    <div class="sec-tag">序 · PROLOGUE</div>
+    <div class="sec-title">大漠孤烟，长河落日</div>
+    <div class="sec-line"></div>
   </div>
-  <p class="s-body fi fi-d1">
+  <p class="sec-body fi fi-d1">
     清明时节，背上行囊，踏入腾格里。<br><br>
     三天两夜，五十公里的沙海跋涉。<br>
     没有信号，没有路标，只有风、沙和头顶的银河。<br><br>
@@ -228,177 +187,134 @@ body{font-family:'Noto Serif SC',serif;background:var(--bg);color:var(--text);ov
   </p>
 </section>
 
-<!-- IMAGE BREAK -->
-<div class="fb fb-med">
+<div class="ib">
   <img src="https://images.unsplash.com/photo-1549388604-817d15aa0110?w=1400&q=80" alt="沙丘日落" loading="lazy">
-  <div class="fb-cap"><span>WHEN THE SKY CATCHES FIRE</span></div>
+  <div class="ib-ov"></div>
+  <div class="ib-poem">天际燃烧的那一刻，整个沙漠都在呼吸</div>
 </div>
 
-<!-- TIMELINE -->
-<section class="s" style="background:var(--bg2)">
-  <div class="fi">
-    <div class="s-label">Journey · 行程</div>
-    <div class="s-h">三天两夜</div>
-    <div class="s-rule"></div>
+<section class="sec" style="background:var(--bg2)">
+  <div class="fi" style="text-align:center">
+    <div class="sec-tag">徒步 · TREKKING</div>
+    <div class="sec-title">三天两夜，脚步丈量沙海</div>
+    <div class="sec-line" style="margin:14px auto 0"></div>
   </div>
   <div class="tl">
-    <div class="tl-item fi">
-      <div class="tl-time">DAY 1 · AM</div>
-      <div class="tl-body">
-        <div class="tl-ev">抵达腾格里</div>
-        <div class="tl-d">从银川出发，穿越贺兰山，进入阿拉善。风沙扑面，苍茫大地铺展至天际。</div>
-      </div>
-    </div>
-    <div class="tl-item fi">
-      <div class="tl-time">DAY 1 · PM</div>
-      <div class="tl-body">
-        <div class="tl-ev">首入沙海</div>
-        <div class="tl-d">沙丘起伏如凝固的海浪。脚陷进细沙，每一步都像在和大地谈判。</div>
-      </div>
-    </div>
-    <div class="tl-item fi">
-      <div class="tl-time">DAY 2</div>
-      <div class="tl-body">
-        <div class="tl-ev">穿越核心区</div>
-        <div class="tl-d">翻过一座又一座沙丘，体力与意志反复拉扯。天地之间，只剩下一个念头——走。</div>
-      </div>
-    </div>
-    <div class="tl-item fi">
-      <div class="tl-time">DAY 2 · NIGHT</div>
-      <div class="tl-body">
-        <div class="tl-ev">沙漠露营</div>
-        <div class="tl-d">银河低垂，触手可及。篝火旁的人安静下来，抬头便是整个宇宙。</div>
-      </div>
-    </div>
-    <div class="tl-item fi">
-      <div class="tl-time">DAY 3</div>
-      <div class="tl-body">
-        <div class="tl-ev">走出沙海</div>
-        <div class="tl-d">最后的日出，将整片沙漠烧成琥珀色。脚印很快被风抚平——好像从未来过，又好像哪里都留下了。</div>
-      </div>
-    </div>
+    <div class="tl-i fi"><div class="tl-dot"></div><div class="t-time">Day 1 · 上午</div><div class="t-ev">抵达腾格里</div><div class="t-d">从银川出发，穿越贺兰山，进入阿拉善。风沙扑面，苍茫大地铺展至天际。</div></div>
+    <div class="tl-i fi"><div class="tl-dot"></div><div class="t-time">Day 1 · 下午</div><div class="t-ev">首入沙海</div><div class="t-d">沙丘起伏如凝固的海浪，阳光将影子拉得极长。每一步都像在和大地谈判。</div></div>
+    <div class="tl-i fi"><div class="tl-dot"></div><div class="t-time">Day 2</div><div class="t-ev">穿越核心区</div><div class="t-d">翻过一座又一座沙丘，体力与意志反复拉扯。天地之间，只剩下一个念头——走。</div></div>
+    <div class="tl-i fi"><div class="tl-dot"></div><div class="t-time">Day 2 · 夜晚</div><div class="t-ev">沙漠露营</div><div class="t-d">银河低垂，触手可及。篝火旁的人安静下来，抬头便是整个宇宙。</div></div>
+    <div class="tl-i fi"><div class="tl-dot"></div><div class="t-time">Day 3</div><div class="t-ev">走出沙海</div><div class="t-d">最后的日出，将整片沙漠烧成琥珀色。脚印很快被风抚平——好像从未来过，又好像哪里都留下了。</div></div>
   </div>
 </section>
 
-<!-- STATS -->
-<section class="s" style="padding-top:48px;padding-bottom:48px">
+<section class="sec" style="padding-top:0;padding-bottom:48px">
   <div class="stats">
-    <div class="stat fi"><div class="stat-n">3</div><div class="stat-l">DAYS</div></div>
-    <div class="stat fi fi-d1"><div class="stat-n">50+</div><div class="stat-l">KILOMETERS</div></div>
-    <div class="stat fi fi-d2"><div class="stat-n">4.3万</div><div class="stat-l">KM²</div></div>
+    <div class="stat fi"><div class="stat-n">3</div><div class="stat-l">天</div></div>
+    <div class="stat fi fi-d1"><div class="stat-n">50+</div><div class="stat-l">公里</div></div>
+    <div class="stat fi fi-d2"><div class="stat-n">4.3万</div><div class="stat-l">km²</div></div>
   </div>
 </section>
 
-<!-- IMAGE BREAK -->
-<div class="fb fb-tall">
+<div class="ib">
   <img src="https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=1400&q=80" alt="沙漠远景" loading="lazy">
-  <div class="fb-cap"><span>THE EDGE OF NOWHERE</span></div>
+  <div class="ib-ov"></div>
+  <div class="ib-poem">无边的远方，是心出发的地方</div>
 </div>
 
-<!-- GALLERY -->
 <section class="gal">
-  <div class="s" style="padding-bottom:0">
-    <div class="fi">
-      <div class="s-label">Moments · 实拍</div>
-      <div class="s-h">旅途<em>掠影</em></div>
-      <div class="s-rule"></div>
-    </div>
+  <div class="gal-head fi">
+    <div class="sec-tag">实拍 · MOMENTS</div>
+    <div class="sec-title">旅途掠影</div>
+    <div class="sec-line"></div>
   </div>
 
   <div class="gal-item gal-full fi">
-    <img src="photo1.jpg" alt="腾格里" loading="lazy">
-    <div class="gal-info">
-      <div class="gi-tag">四郎带你探索 · DAY 1</div>
-      <div class="gi-t">一步一沙，皆是远方</div>
-      <div class="gi-p">脚下的每一粒沙，都承载着千年的风声。不问终点，只管前行。</div>
+    <img src="photo1.jpg" alt="腾格里实拍" loading="lazy">
+    <div class="gal-ov">
+      <div class="gal-tag">四郎带你探索 · DAY 1</div>
+      <div class="gal-title">一步一沙，皆是远方</div>
+      <div class="gal-poem">脚下的每一粒沙，都承载着千年的风声。在这片没有边界的天地间，我们终于学会了——不问终点，只管前行。</div>
     </div>
   </div>
 
-  <div class="gal-pair">
+  <div class="gal-duo">
     <div class="gal-item fi fi-d1">
-      <img src="photo2.jpg" alt="腾格里" loading="lazy">
-      <div class="gal-info">
-        <div class="gi-tag">DAY 2</div>
-        <div class="gi-t">沙海之上，天地一线</div>
-        <div class="gi-p">风将沙丘塑成诗的形状</div>
+      <img src="photo2.jpg" alt="腾格里实拍" loading="lazy">
+      <div class="gal-ov">
+        <div class="gal-tag">DAY 2</div>
+        <div class="gal-title">沙海之上，天地一线</div>
+        <div class="gal-poem">风将沙丘塑成诗的形状，阳光在每一道褶皱里写下金色的句子。</div>
       </div>
     </div>
     <div class="gal-item fi fi-d2">
-      <img src="photo3.jpg" alt="腾格里" loading="lazy">
-      <div class="gal-info">
-        <div class="gi-tag">DAY 3</div>
-        <div class="gi-t">落日染金</div>
-        <div class="gi-p">每一粒沙都记得你来过的样子</div>
+      <img src="photo3.jpg" alt="腾格里实拍" loading="lazy">
+      <div class="gal-ov">
+        <div class="gal-tag">DAY 3</div>
+        <div class="gal-title">落日将沙海染成金色的海</div>
+        <div class="gal-poem">每一粒沙，都记得你来过的样子。</div>
       </div>
     </div>
   </div>
 
   <div class="gal-item gal-full fi">
-    <img src="photo4.jpg" alt="腾格里" loading="lazy">
-    <div class="gal-info">
-      <div class="gi-tag">四郎带你探索 · 行者笔记</div>
-      <div class="gi-t">风过沙丘，留下一道光的痕迹</div>
-      <div class="gi-p">风从不回头，沙从不抱怨，它们只是一遍又一遍地，将大地雕琢成最温柔的模样。</div>
+    <img src="photo4.jpg" alt="腾格里实拍" loading="lazy">
+    <div class="gal-ov">
+      <div class="gal-tag">四郎带你探索 · 行者笔记</div>
+      <div class="gal-title">风过沙丘，留下一道光的痕迹</div>
+      <div class="gal-poem">风从不回头，沙从不抱怨，它们只是一遍又一遍地，将大地雕琢成最温柔的模样。</div>
     </div>
   </div>
 
-  <div class="gal-pair">
+  <div class="gal-duo">
     <div class="gal-item fi fi-d1">
-      <img src="photo5.jpg" alt="腾格里" loading="lazy">
-      <div class="gal-info">
-        <div class="gi-tag">行者笔记</div>
-        <div class="gi-t">脚步与心跳</div>
-        <div class="gi-p">大地接住了疲惫，又把力量悄悄还给了你</div>
+      <img src="photo5.jpg" alt="腾格里实拍" loading="lazy">
+      <div class="gal-ov">
+        <div class="gal-tag">行者笔记</div>
+        <div class="gal-title">天地之间，只剩脚步与心跳</div>
+        <div class="gal-poem">大地接住了疲惫，又把力量悄悄还给了你。</div>
       </div>
     </div>
     <div class="gal-item fi fi-d2">
-      <img src="photo6.jpg" alt="腾格里" loading="lazy">
-      <div class="gal-info">
-        <div class="gi-tag">行者笔记</div>
-        <div class="gi-t">另一个自己</div>
-        <div class="gi-p">最陌生的风景，是内心从未到过的地方</div>
+      <img src="photo6.jpg" alt="腾格里实拍" loading="lazy">
+      <div class="gal-ov">
+        <div class="gal-tag">行者笔记</div>
+        <div class="gal-title">沙漠深处，藏着另一个自己</div>
+        <div class="gal-poem">最陌生的风景，是内心从未到过的地方。</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SCENIC -->
-<section class="sc">
-  <div class="sc-head fi">
-    <div class="s-label">Scenic · 风景</div>
-    <div class="s-h">四郎的<em>镜头</em></div>
-    <div class="s-rule" style="margin:14px auto 0"></div>
-  </div>
-  <div class="sc-grid">
-    <div class="sc-card tall fi">
-      <img src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=800&q=80" alt="日出" loading="lazy">
-      <div class="sc-i"><span>日出时分，整片沙漠被点燃</span></div>
-    </div>
-    <div class="sc-card fi fi-d1">
-      <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80" alt="公路" loading="lazy">
-      <div class="sc-i"><span>公路尽头，另一片沙海</span></div>
-    </div>
-    <div class="sc-card fi fi-d2">
-      <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&q=80" alt="星空" loading="lazy">
-      <div class="sc-i"><span>银河是每晚的日常</span></div>
-    </div>
-    <div class="sc-card fi fi-d3">
-      <img src="https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?w=800&q=80" alt="沙纹" loading="lazy">
-      <div class="sc-i"><span>风是最好的艺术家</span></div>
-    </div>
+<section class="sec" style="background:var(--bg2)">
+  <div class="fi" style="text-align:center">
+    <div class="sec-tag">风景 · SCENIC</div>
+    <div class="sec-title">四郎的镜头</div>
+    <div class="sec-line" style="margin:14px auto 0"></div>
   </div>
 </section>
+<div class="sc-grid">
+  <div class="sc-card tall fi">
+    <img src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=800&q=80" alt="日出" loading="lazy">
+    <div class="sc-ov"><div class="sc-text">「日出时分，整片沙漠被点燃，像一场无声的盛宴。」</div></div>
+  </div>
+  <div class="sc-card fi fi-d1">
+    <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80" alt="公路" loading="lazy">
+    <div class="sc-ov"><div class="sc-text">「公路尽头，是另一片沙海的开始。」</div></div>
+  </div>
+  <div class="sc-card fi fi-d2">
+    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&q=80" alt="星空" loading="lazy">
+    <div class="sc-ov"><div class="sc-text">「银河不再是传说，而是每晚的日常。」</div></div>
+  </div>
+  <div class="sc-card fi fi-d3">
+    <img src="https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?w=800&q=80" alt="沙纹" loading="lazy">
+    <div class="sc-ov"><div class="sc-text">「风是最好的艺术家，沙是最好的画布。」</div></div>
+  </div>
+</div>
 
-<!-- EXPLORE -->
-<section class="exp">
-  <div class="exp-bg">
-    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=1200&q=80" alt="">
-  </div>
-  <div class="exp-ic fi">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-  </div>
-  <div class="exp-t fi">四郎带你<em>探索</em></div>
-  <p class="exp-d fi fi-d1">
+<section class="exp fi">
+  <div class="exp-title">四郎带你<em>探索</em></div>
+  <p class="exp-body">
     世界很大，大到我们穷尽一生也走不完。<br>
     但每一步，都算数。<br><br>
     <strong>四郎，一个用脚步丈量世界的行者。</strong><br>
@@ -407,17 +323,16 @@ body{font-family:'Noto Serif SC',serif;background:var(--bg);color:var(--text);ov
     这不是旅行攻略，<br>
     这是一个人，和一片沙漠的故事。
   </p>
-  <div class="exp-cta fi fi-d2">
-    MORE JOURNEYS
-    <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  <div class="exp-btn">
+    更多探索
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
   </div>
 </section>
 
-<!-- NIGHT -->
 <section class="night fi">
-  <div class="s-label">Starry · 星河</div>
-  <div class="s-h">星河<em>入梦</em></div>
-  <p class="s-body" style="margin:12px auto 0;text-align:center">远离城市的灯光，才真正看见了星星。</p>
+  <div class="sec-tag">星河 · STARRY</div>
+  <div class="sec-title" style="margin-top:8px">星河入梦</div>
+  <p class="sec-body" style="margin:16px auto 0;text-align:center;color:var(--dim)">远离城市的灯光，才真正看见了星星。</p>
   <div class="np">
     银河低垂，触手可及，<br>
     流星划过夜空的那一刻，<br>
@@ -427,30 +342,28 @@ body{font-family:'Noto Serif SC',serif;background:var(--bg);color:var(--text);ov
   </div>
 </section>
 
-<!-- CLOSING -->
 <section class="cls fi">
-  <div class="s-label">Epilogue · 尾声</div>
-  <p class="cls-t">
+  <div class="sec-tag" style="text-align:center;color:var(--dim)">尾声 · EPILOGUE</div>
+  <p class="cls-text">
     我们翻越的不只是沙丘，<br>
     更是心里的那座山。<br><br>
     <em>下一站，四郎带你继续出发。</em>
   </p>
-  <div class="cls-rule"></div>
+  <div class="cls-dot"></div>
   <div class="cls-sig">腾格里 · 2026 清明</div>
 </section>
 
-<!-- FOOTER -->
 <footer class="ft">
   <div class="ft-brand">四郎带你探索</div>
-  <div class="ft-copy">此行，无憾</div>
+  <div class="ft-sub">风 · 沙 · 星 · 路 &nbsp;|&nbsp; 此行，无憾</div>
 </footer>
 
 <script>
-window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('ld').classList.add('out')},800)});
+window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('ld').classList.add('out')},600)});
 const obs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('vis')})},{threshold:.08,rootMargin:'0px 0px -20px 0px'});
-document.querySelectorAll('.fi,.tl-item,.stat,.gal-item,.sc-card').forEach(el=>obs.observe(el));
+document.querySelectorAll('.fi,.tl-i,.stat,.gal-item,.sc-card').forEach(el=>obs.observe(el));
 let t=false;
-window.addEventListener('scroll',()=>{if(!t){requestAnimationFrame(()=>{const y=window.pageYOffset;const h=document.querySelector('.hero-bg img');if(h)h.style.transform='translateY('+y*.15+'px) scale(1.05)';t=false})}t=true},{passive:true});
+window.addEventListener('scroll',()=>{if(!t){requestAnimationFrame(()=>{const y=window.pageYOffset;const h=document.querySelector('.hero-bg img');if(h)h.style.transform='translateY('+y*.15+'px)';document.querySelectorAll('.ib img').forEach(img=>{const r=img.parentElement.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)img.style.transform='translateY('+r.top*.08+'px)'});t=false})}t=true},{passive:true});
 </script>
 </body>
 </html>
