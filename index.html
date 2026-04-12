@@ -5,352 +5,348 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0,user-scalable=yes">
 <title>四郎带你探索 · 腾格里沙漠</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@200;300;400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Noto+Serif+SC:wght@200;300;400;600;700&family=Liu+Jian+Mao+Cao&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#1a1510;--bg2:#211c14;--gold:#d4a853;--gold2:#f0d89a;--sand:#e8dcc8;--sand2:#c4b08a;--text:#f5efe3;--text2:#bfb49e;--dim:#8a7e6a}
+:root{--bg:#1c1915;--bg2:#252019;--parch:#f4ecd8;--parch2:#e8dcc4;--ink:#3a2f24;--ink2:#6b5d4f;--gold:#c4944a;--gold2:#dbb978;--blush:#c4867a}
 html{scroll-behavior:smooth}
-body{font-family:'Noto Serif SC',serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.8}
+body{font-family:'Noto Serif SC',serif;background:var(--bg);color:var(--parch2);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.9;font-weight:300}
 
-/* Loader */
+/* ── Loader ── */
 .ld{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 1s,visibility 1s}
 .ld.out{opacity:0;visibility:hidden}
-.ld-t{font-family:'Ma Shan Zheng',cursive;font-size:32px;color:var(--gold2);letter-spacing:6px;text-shadow:0 0 40px rgba(212,168,83,.3)}
-.ld-s{font-size:10px;letter-spacing:8px;color:var(--dim);margin-top:6px}
-.ld-bar{width:60px;height:1px;background:rgba(212,168,83,.15);margin-top:20px;border-radius:1px;overflow:hidden}
-.ld-bar i{display:block;width:100%;height:100%;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:shine 2s ease infinite}
-@keyframes shine{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.ld-title{font-family:'Liu Jian Mao Cao',cursive;font-size:28px;color:var(--gold2);letter-spacing:4px}
+.ld-sub{font-size:9px;letter-spacing:8px;color:var(--ink2);margin-top:8px;opacity:.5}
+.ld-bar{width:50px;height:1px;background:rgba(196,148,74,.15);margin-top:24px;overflow:hidden}
+.ld-bar i{display:block;width:100%;height:100%;background:var(--gold2);animation:slide 2s ease infinite}
+@keyframes slide{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 
-/* Hero */
-.hero{position:relative;height:100vh;min-height:100dvh;overflow:hidden}
-.hero-bg{position:absolute;inset:-20px}
-.hero-bg img{width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;filter:brightness(.35) saturate(1.3) contrast(1.1)}
-.hero-ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,21,16,.3) 0%,transparent 25%,transparent 40%,rgba(26,21,16,.6) 75%,var(--bg) 100%)}
-.hero-c{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:0 28px 14vh;text-align:center;z-index:2}
-.hero-badge{font-size:10px;letter-spacing:8px;color:var(--gold);border:1px solid rgba(212,168,83,.2);padding:6px 20px;border-radius:20px;margin-bottom:24px;font-weight:300;backdrop-filter:blur(8px);background:rgba(26,21,16,.3)}
-.hero-title{font-family:'Ma Shan Zheng',cursive;font-size:clamp(56px,16vw,100px);color:var(--text);letter-spacing:8px;text-shadow:0 4px 60px rgba(212,168,83,.15);line-height:1.1}
-.hero-sub{font-size:clamp(13px,3.2vw,16px);color:var(--text2);font-weight:200;letter-spacing:3px;margin-top:16px;line-height:2.2;max-width:400px}
-.hero-sub em{font-style:normal;color:var(--gold)}
-.hero-scroll{position:absolute;bottom:4vh;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.35}
-.hero-scroll span{font-size:8px;letter-spacing:6px;color:var(--sand2)}
-.hero-scroll i{width:1px;height:28px;background:linear-gradient(var(--sand2),transparent);animation:float 3s ease infinite}
-@keyframes float{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-6px);opacity:.8}}
+/* ── Cover ── */
+.cover{position:relative;height:100vh;min-height:100dvh;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.cover-bg{position:absolute;inset:0}
+.cover-bg img{width:100%;height:100%;object-fit:cover;filter:sepia(.25) brightness(.3) saturate(1.2)}
+.cover-ov{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(28,25,21,.3) 0%,rgba(28,25,21,.85) 100%)}
+.cover-inner{position:relative;z-index:2;text-align:center;padding:0 32px}
+.cover-line{width:1px;height:48px;background:linear-gradient(var(--gold2),transparent);margin:0 auto 32px;opacity:.4}
+.cover-title{font-family:'Liu Jian Mao Cao',cursive;font-size:clamp(52px,16vw,90px);color:var(--parch);letter-spacing:12px;line-height:1.15;text-shadow:0 2px 40px rgba(196,148,74,.15)}
+.cover-en{font-family:'ZCOOL XiaoWei',serif;font-size:10px;letter-spacing:10px;color:var(--gold);opacity:.5;margin-top:12px;text-transform:uppercase}
+.cover-quote{margin-top:36px;font-size:clamp(13px,3vw,15px);color:var(--parch2);font-weight:200;letter-spacing:2px;line-height:2.4;font-style:italic;opacity:.7;max-width:380px;margin-left:auto;margin-right:auto}
+.cover-arrow{position:absolute;bottom:6vh;left:50%;transform:translateX(-50%);z-index:2}
+.cover-arrow i{display:block;width:1px;height:36px;background:linear-gradient(transparent,var(--gold));margin:0 auto;animation:pulse 2.5s ease infinite}
+@keyframes pulse{0%,100%{opacity:.2;transform:scaleY(.8)}50%{opacity:.6;transform:scaleY(1)}}
 
-/* Section */
-.sec{padding:56px 28px}
-.sec-tag{font-size:9px;letter-spacing:6px;color:var(--gold);font-weight:300}
-.sec-title{font-family:'Ma Shan Zheng',cursive;font-size:clamp(26px,6vw,38px);color:var(--text);letter-spacing:3px;margin-top:8px}
-.sec-line{width:30px;height:1px;background:var(--gold);margin:14px 0 0;opacity:.5;border-radius:1px}
-.sec-body{font-size:clamp(13px,3vw,15px);line-height:2.5;color:var(--text2);font-weight:300;letter-spacing:.5px;margin-top:20px;max-width:500px}
-.sec-body strong{color:var(--text);font-weight:400}
+/* ── Chapter ── */
+.ch{padding:64px 28px}
+.ch-head{margin-bottom:40px}
+.ch-num{font-family:'Liu Jian Mao Cao',cursive;font-size:48px;color:var(--gold);opacity:.2;line-height:1}
+.ch-title{font-family:'ZCOOL XiaoWei',serif;font-size:clamp(18px,4.5vw,22px);color:var(--parch);letter-spacing:4px;margin-top:-8px}
 
-/* Quote */
-.quote{padding:64px 28px;text-align:center;position:relative}
-.quote-mark{font-family:'Ma Shan Zheng',cursive;font-size:80px;color:rgba(212,168,83,.06);line-height:1;margin-bottom:8px}
-.quote-text{font-size:clamp(15px,3.8vw,19px);line-height:2.8;color:var(--text);font-weight:300;letter-spacing:1px;max-width:460px;margin:0 auto}
-.quote-text strong{color:var(--gold2);font-weight:400}
-.quote-from{margin-top:16px;font-size:10px;color:var(--dim);letter-spacing:4px}
+/* ── Prose ── */
+.prose{font-size:clamp(14px,3.2vw,16px);line-height:2.6;color:var(--parch2);font-weight:300;letter-spacing:1px}
+.prose p{margin-bottom:20px;text-indent:2em}
+.prose strong{color:var(--parch);font-weight:400}
+.prose em{color:var(--gold2);font-style:normal}
 
-/* Image Break */
-.ib{width:100%;height:45vh;min-height:240px;overflow:hidden;position:relative}
-.ib img{width:100%;height:130%;object-fit:cover;position:absolute;bottom:0;filter:saturate(1.2) contrast(1.05)}
-.ib-ov{position:absolute;inset:0;background:linear-gradient(var(--bg) 0%,transparent 15%,transparent 85%,var(--bg) 100%)}
-.ib-poem{position:absolute;bottom:24px;left:28px;right:28px;font-size:12px;color:rgba(245,239,227,.5);font-weight:300;letter-spacing:1px;line-height:2;z-index:2;font-style:italic}
+/* ── Standalone Quote ── */
+.sq{padding:48px 28px;text-align:center;position:relative}
+.sq::before,.sq::after{content:'';position:absolute;left:50%;transform:translateX(-50%);width:24px;height:1px;background:var(--gold);opacity:.2}
+.sq::before{top:0}.sq::after{bottom:0}
+.sq-text{font-family:'Liu Jian Mao Cao',cursive;font-size:clamp(20px,5vw,26px);line-height:2;color:var(--parch);letter-spacing:3px}
+.sq-text em{color:var(--gold2)}
 
-/* Timeline */
-.tl{max-width:440px;margin:32px auto 0;position:relative;padding-left:1px}
-.tl::before{content:'';position:absolute;left:15px;top:12px;bottom:12px;width:1px;background:linear-gradient(to bottom,var(--gold),rgba(212,168,83,.05))}
-.tl-i{position:relative;padding-left:44px;margin-bottom:32px;opacity:0;transform:translateY(16px);transition:all .8s cubic-bezier(.22,1,.36,1)}
-.tl-i.vis{opacity:1;transform:translateY(0)}
-.tl-dot{position:absolute;left:10px;top:6px;width:11px;height:11px;border-radius:50%;border:2px solid var(--gold);background:var(--bg);box-shadow:0 0 0 3px rgba(212,168,83,.08)}
-.tl-i .t-time{font-size:9px;color:var(--gold);letter-spacing:4px;font-weight:300;margin-bottom:3px}
-.tl-i .t-ev{font-size:15px;font-weight:600;color:var(--text);letter-spacing:1px;margin-bottom:3px}
-.tl-i .t-d{font-size:12px;color:var(--dim);font-weight:300;line-height:2.2}
+/* ── Image with Text Block ── */
+.it{margin-bottom:6px;position:relative;overflow:hidden}
+.it img{width:100%;display:block}
+.it-full{height:55vh;min-height:280px}
+.it-full img{width:100%;height:100%;object-fit:cover}
+.it-cap{padding:16px 28px 12px}
+.it-cap-title{font-family:'ZCOOL XiaoWei',serif;font-size:13px;color:var(--gold);letter-spacing:2px}
+.it-cap-text{font-size:12px;color:var(--ink2);letter-spacing:.5px;line-height:2.2;margin-top:4px;font-weight:300;font-style:italic}
 
-/* Stats */
-.stats{display:flex;gap:16px;padding:44px 28px}
-.stat{flex:1;text-align:center;padding:28px 8px;background:var(--bg2);border:1px solid rgba(212,168,83,.08);border-radius:12px;opacity:0;transform:translateY(12px);transition:all .7s ease-out}
-.stat.vis{opacity:1;transform:translateY(0)}
-.stat-n{font-family:'Ma Shan Zheng',cursive;font-size:clamp(32px,9vw,48px);color:var(--gold);line-height:1}
-.stat-l{font-size:10px;color:var(--dim);letter-spacing:4px;margin-top:6px}
+/* ── Poem Block ── */
+.poem{padding:40px 28px;text-align:center;background:var(--bg2)}
+.poem-line{font-family:'Liu Jian Mao Cao',cursive;font-size:clamp(16px,4vw,20px);color:var(--parch);letter-spacing:3px;line-height:2.8}
+.poem-line em{color:var(--gold2)}
+.poem-author{margin-top:20px;font-size:10px;color:var(--ink2);letter-spacing:4px;font-style:italic}
 
-/* Gallery */
-.gal{padding:0}
-.gal-head{padding:0 28px 28px}
-.gal-item{position:relative;overflow:hidden;margin-bottom:4px}
-.gal-item img{width:100%;display:block;object-fit:cover;transition:transform .8s}
-.gal-full{height:55vh;min-height:280px}
-.gal-full img{height:100%}
-.gal-duo{display:grid;grid-template-columns:1fr 1fr;gap:4px}
-.gal-duo .gal-item{height:38vh;min-height:180px}
-.gal-duo img{height:100%}
-.gal-ov{position:absolute;inset:0;background:linear-gradient(0deg,rgba(26,21,16,.85) 0%,rgba(26,21,16,.15) 35%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:24px 24px 20px}
-.gal-tag{font-size:8px;letter-spacing:5px;color:var(--gold);opacity:.7;font-weight:300;margin-bottom:8px}
-.gal-title{font-family:'Ma Shan Zheng',cursive;font-size:clamp(18px,4.5vw,22px);color:var(--text);letter-spacing:2px}
-.gal-poem{font-size:12px;color:var(--text2);font-weight:300;letter-spacing:.5px;line-height:2.2;margin-top:6px;max-width:380px}
-.gal-from{font-size:9px;color:var(--dim);letter-spacing:4px;margin-top:8px}
+/* ── Diary Style ── */
+.diary{padding:56px 28px;border-top:1px solid rgba(196,148,74,.06);border-bottom:1px solid rgba(196,148,74,.06)}
+.diary-date{font-family:'ZCOOL XiaoWei',serif;font-size:11px;color:var(--gold);letter-spacing:4px;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.diary-date::before{content:'';width:20px;height:1px;background:var(--gold);opacity:.4}
+.diary-title{font-family:'ZCOOL XiaoWei',serif;font-size:clamp(16px,4vw,19px);color:var(--parch);letter-spacing:2px;margin-bottom:16px}
+.diary-text{font-size:clamp(13px,3vw,14px);line-height:2.6;color:var(--parch2);font-weight:300;letter-spacing:.5px}
+.diary-text p{margin-bottom:14px;text-indent:2em}
+.diary-text strong{color:var(--parch);font-weight:400}
 
-/* Scenic */
-.sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:0 28px}
-.sc-card{position:relative;border-radius:8px;overflow:hidden}
-.sc-card.tall{grid-row:span 2;border-radius:12px}
-.sc-card img{width:100%;height:100%;object-fit:cover;display:block;min-height:140px;filter:brightness(.85) saturate(1.15)}
-.sc-ov{position:absolute;inset:0;background:linear-gradient(0deg,rgba(26,21,16,.75) 0%,transparent 45%);display:flex;align-items:flex-end;padding:16px}
-.sc-text{font-size:11px;color:var(--text2);font-weight:300;letter-spacing:.5px;line-height:1.8;font-style:italic}
+/* ── Gallery Masonry ── */
+.gal{padding:56px 24px}
+.gal-head{text-align:center;margin-bottom:32px}
+.gal-masonry{columns:2;column-gap:6px}
+.gal-masonry .g-item{break-inside:avoid;margin-bottom:6px;position:relative;overflow:hidden;border-radius:2px}
+.gal-masonry .g-item img{width:100%;display:block}
+.gal-masonry .g-item .g-ov{position:absolute;bottom:0;left:0;right:0;padding:12px 14px 10px;background:linear-gradient(transparent,rgba(28,25,21,.8));opacity:0;transition:opacity .4s}
+.gal-masonry .g-item:active .g-ov{opacity:1}
+.gal-masonry .g-item .g-ov span{font-size:10px;color:var(--parch2);font-weight:300;letter-spacing:.5px;line-height:1.6}
+@media(max-width:767px){.gal-masonry .g-item .g-ov{opacity:1}}
 
-/* Explore */
-.exp{padding:64px 28px;text-align:center;background:linear-gradient(var(--bg),#0f0c08);position:relative;overflow:hidden}
-.exp::before{content:'';position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,83,.04),transparent 70%);top:-200px;left:50%;transform:translateX(-50%)}
-.exp-title{font-family:'Ma Shan Zheng',cursive;font-size:clamp(30px,8vw,44px);color:var(--text);letter-spacing:4px}
-.exp-title em{font-style:normal;color:var(--gold)}
-.exp-body{font-size:clamp(13px,3vw,15px);line-height:2.6;color:var(--dim);font-weight:300;margin-top:20px;max-width:400px;margin-left:auto;margin-right:auto;letter-spacing:.5px}
-.exp-body strong{color:var(--text2);font-weight:400}
-.exp-btn{display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-size:10px;letter-spacing:5px;color:var(--gold);border:1px solid rgba(212,168,83,.2);padding:10px 24px;border-radius:20px;font-weight:300}
-.exp-btn svg{width:12px;height:12px;fill:var(--gold)}
+/* ── Numbers ── */
+.nums{display:flex;gap:1px;padding:0 28px;margin:0 28px;background:rgba(196,148,74,.08)}
+.num{flex:1;background:var(--bg);padding:32px 8px;text-align:center}
+.num-v{font-family:'ZCOOL XiaoWei',serif;font-size:clamp(28px,8vw,40px);color:var(--parch);letter-spacing:1px}
+.num-l{font-size:9px;color:var(--ink2);letter-spacing:4px;margin-top:6px}
 
-/* Night Poem */
-.night{padding:64px 28px;text-align:center;background:#0f0c08}
-.np{font-family:'Ma Shan Zheng',cursive;font-size:clamp(18px,4.5vw,24px);line-height:3;color:var(--text2);letter-spacing:2px;margin-top:28px}
-.np em{font-style:normal;color:var(--gold)}
+/* ── Scenic Strip ── */
+.strip{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:4px;padding:0 28px}
+.strip::-webkit-scrollbar{display:none}
+.strip .s-item{flex:0 0 70vw;max-width:320px;scroll-snap-align:start;position:relative;border-radius:4px;overflow:hidden;height:50vh;min-height:240px}
+.strip .s-item img{width:100%;height:100%;object-fit:cover}
+.strip .s-item .s-cap{position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(transparent,rgba(28,25,21,.8))}
+.strip .s-item .s-cap span{font-size:11px;color:var(--parch2);font-weight:300;font-style:italic;line-height:1.7}
 
-/* Closing */
-.cls{padding:80px 28px 88px;text-align:center}
-.cls-text{font-size:clamp(16px,4vw,20px);font-weight:300;color:var(--text2);letter-spacing:2px;line-height:2.6}
-.cls-text em{font-style:normal;color:var(--gold)}
-.cls-dot{width:5px;height:5px;border:1px solid var(--gold);border-radius:50%;margin:28px auto 0;opacity:.3}
-.cls-sig{font-size:10px;color:var(--dim);letter-spacing:5px;margin-top:16px}
+/* ── Closing ── */
+.end{padding:88px 28px 96px;text-align:center;position:relative}
+.end::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:48px;background:linear-gradient(transparent,var(--gold),transparent);opacity:.2}
+.end-text{font-family:'Liu Jian Mao Cao',cursive;font-size:clamp(20px,5vw,28px);color:var(--parch);letter-spacing:4px;line-height:2.4}
+.end-text em{color:var(--gold2)}
+.end-sig{margin-top:32px;font-size:9px;color:var(--ink2);letter-spacing:6px}
 
-/* Footer */
-.ft{padding:20px 28px;text-align:center;border-top:1px solid rgba(212,168,83,.06)}
-.ft-brand{font-family:'Ma Shan Zheng',cursive;font-size:14px;color:var(--gold);letter-spacing:6px;opacity:.5;margin-bottom:6px}
-.ft-sub{font-size:9px;color:var(--dim);letter-spacing:3px}
+/* ── Footer ── */
+.ft{padding:20px 28px;text-align:center}
+.ft-brand{font-family:'ZCOOL XiaoWei',serif;font-size:11px;color:var(--gold);letter-spacing:6px;opacity:.4}
+.ft-sub{font-size:8px;color:var(--ink2);letter-spacing:3px;margin-top:6px}
 
-/* FI */
-.fi{opacity:0;transform:translateY(18px);transition:all .9s cubic-bezier(.22,1,.36,1)}
+/* ── FI ── */
+.fi{opacity:0;transform:translateY(14px);transition:all .8s cubic-bezier(.22,1,.36,1)}
 .fi.vis{opacity:1;transform:translateY(0)}
-.fi-d1{transition-delay:.1s}.fi-d2{transition-delay:.2s}.fi-d3{transition-delay:.3s}
+.fi-d1{transition-delay:.1s}.fi-d2{transition-delay:.15s}
 
 @media(min-width:768px){
-  .sec{padding:80px 12%}
-  .gal-full{height:65vh}
-  .gal-duo .gal-item{height:45vh}
-  .sc-grid{max-width:560px;margin:0 auto}
+  .ch{padding:88px 14%}
+  .gal-masonry{columns:3}
+  .strip .s-item{flex:0 0 40vw;max-width:400px}
 }
 </style>
 </head>
 <body>
 
-<div class="ld" id="ld">
-  <div class="ld-t">四郎带你探索</div>
-  <div class="ld-s">TENGGRI DESERT</div>
-  <div class="ld-bar"><i></i></div>
-</div>
+<!-- LOADER -->
+<div class="ld" id="ld"><div class="ld-title">四郎带你探索</div><div class="ld-sub">腾格里沙漠</div><div class="ld-bar"><i></i></div></div>
 
-<section class="hero">
-  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1600&q=80" alt="腾格里"></div>
-  <div class="hero-ov"></div>
-  <div class="hero-c">
-    <div class="hero-badge">四郎带你探索</div>
-    <h1 class="hero-title">腾格里</h1>
-    <p class="hero-sub">三天两夜 · 五十公里沙海跋涉<br><em>风起沙海，行者无疆</em></p>
+<!-- ═══ COVER ═══ -->
+<section class="cover">
+  <div class="cover-bg"><img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1600&q=80" alt="腾格里"></div>
+  <div class="cover-ov"></div>
+  <div class="cover-inner fi">
+    <div class="cover-line"></div>
+    <h1 class="cover-title">腾格里</h1>
+    <div class="cover-en">The Tengger Desert · 2026</div>
+    <p class="cover-quote">每想你一次，天上飘落一粒沙，从此形成了撒哈拉。—— 三毛</p>
   </div>
-  <div class="hero-scroll"><span>SCROLL</span><i></i></div>
+  <div class="cover-arrow"><i></i></div>
 </section>
 
-<section class="quote fi">
-  <div class="quote-mark">"</div>
-  <p class="quote-text">
-    所有的旅行，都是一次向内的跋涉。<br>
-    腾格里的沙，不问来路，不问归途，<br>
-    它只教你一件事——<br>
-    <strong>安静地走，路会自己出现。</strong>
-  </p>
-  <p class="quote-from">—— 四郎 · 写在出发前</p>
+<!-- ═══ CHAPTER 1: 出发 ═══ -->
+<section class="ch fi">
+  <div class="ch-head">
+    <div class="ch-num">壹</div>
+    <div class="ch-title">出发，是因为远方在召唤</div>
+  </div>
+  <div class="prose">
+    <p>有人问我为什么要去沙漠。我想了很久，说不出一个像样的理由。</p>
+    <p>大概是因为，城市的日子过久了，人会被慢慢磨成一块光滑的石头——不再有棱角，不再有疼痛，也不再知道自己真正的样子。</p>
+    <p><strong>而沙漠不会骗你。</strong>它不会给你虚假的舒适，也不会替你回答任何问题。它只是静静地摊开在那里，五十公里，无边无际。</p>
+    <p>你走或不走，它都在。但如果你走了，你会遇见一些东西——<em>关于自己，关于天地，关于那些被遗忘了很久的、真正重要的事。</em></p>
+  </div>
 </section>
 
-<div class="ib">
+<!-- ═══ IMAGE ═══ -->
+<div class="it it-full fi">
   <img src="https://images.unsplash.com/photo-1489493887464-892be6d1daae?w=1400&q=80" alt="沙纹" loading="lazy">
-  <div class="ib-ov"></div>
-  <div class="ib-poem">风留下的指纹，是沙漠最温柔的语言</div>
+</div>
+<div class="it-cap">
+  <div class="it-cap-title">风的指纹</div>
+  <div class="it-cap-text">每一道沙纹，都是风写给大地的情书。没有署名，没有日期，但每一封都被认真读过。</div>
 </div>
 
-<section class="sec">
-  <div class="fi">
-    <div class="sec-tag">序 · PROLOGUE</div>
-    <div class="sec-title">大漠孤烟，长河落日</div>
-    <div class="sec-line"></div>
+<!-- ═══ STANDALONE QUOTE ═══ -->
+<div class="sq fi">
+  <div class="sq-text"><em>沙漠的美，在于它什么也不给你，</em><br>却又好像什么都给了。</div>
+</div>
+
+<!-- ═══ CHAPTER 2: 第一天 ═══ -->
+<section class="diary fi">
+  <div class="diary-date">四月 · 清明 · 第一日</div>
+  <div class="diary-title">初见沙海</div>
+  <div class="diary-text">
+    <p>从银川出发，翻过贺兰山，进入阿拉善的那一刻，车窗外的风景突然变了。绿色消失，戈壁出现，然后是沙——一望无际的、安静得不讲道理的沙。</p>
+    <p><strong>脚踩上去的瞬间，我明白了什么叫"脚踏实地"。</strong>城市里的路太硬了，硬到让人忘了脚掌原来是有感觉的。而沙漠是软的，每一步都陷进去一点，像大地在轻轻接住你。</p>
+    <p>下午开始徒步。沙丘起伏如凝固的海浪，阳光将影子拉得极长。走了大约十公里，肩膀开始酸痛，嘴唇干裂，鞋里灌满了细沙。</p>
+    <p>但我不想停下来。因为每翻过一座沙丘，看到的景色都不一样——<em>新的光影，新的线条，新的沉默。</em></p>
   </div>
-  <p class="sec-body fi fi-d1">
-    清明时节，背上行囊，踏入腾格里。<br><br>
-    三天两夜，五十公里的沙海跋涉。<br>
-    没有信号，没有路标，只有风、沙和头顶的银河。<br><br>
-    <strong>沙漠的美，从来不是征服，<br>而是走进去之后，发现自己愿意停留。</strong>
-  </p>
 </section>
 
-<div class="ib">
+<!-- ═══ PHOTOS 1-3 ═══ -->
+<div class="it it-full fi">
+  <img src="photo1.jpg" alt="腾格里实拍" loading="lazy">
+</div>
+<div class="it-cap">
+  <div class="it-cap-title">四郎带你探索 · DAY 1</div>
+  <div class="it-cap-text">一步一沙，皆是远方。脚下的每一粒沙，都承载着千年的风声。</div>
+</div>
+
+<div class="it it-full fi">
+  <img src="photo2.jpg" alt="腾格里实拍" loading="lazy">
+</div>
+<div class="it-cap">
+  <div class="it-cap-title">DAY 2 · 沙海之上</div>
+  <div class="it-cap-text">风将沙丘塑成诗的形状，阳光在每一道褶皱里写下金色的句子。站在沙脊上，世界安静得只剩呼吸。</div>
+</div>
+
+<div class="it it-full fi">
+  <img src="photo3.jpg" alt="腾格里实拍" loading="lazy">
+</div>
+<div class="it-cap">
+  <div class="it-cap-title">DAY 3 · 落日染金</div>
+  <div class="it-cap-text">最后一缕阳光消失在地平线下，每一粒沙，都记得你来过的样子。</div>
+</div>
+
+<!-- ═══ CHAPTER 3: 第二天 ═══ -->
+<section class="diary fi">
+  <div class="diary-date">四月 · 清明 · 第二日</div>
+  <div class="diary-title">穿越</div>
+  <div class="diary-text">
+    <p>这是最艰难的一天。</p>
+    <p>翻过一座沙丘，以为到了尽头，结果发现后面还有五座。翻过五座，发现后面还有十座。沙漠就是这样——<strong>它用沉默教你耐心，用辽阔教你谦卑。</strong></p>
+    <p>中午的时候，我坐在沙丘顶上喝水，忽然觉得整片沙漠像一块巨大的琥珀。阳光透过云层洒下来，每一粒沙子都在发光。</p>
+    <p>那一刻，我什么都不想。不想工作，不想手机，不想昨天和明天。脑子里只有一个念头：<em>活着真好。</em></p>
+    <p>夜里露营。篝火点燃的时候，所有人都安静了。抬头，银河低垂，触手可及。星星多得像撒了一地的钻石，随便一颗都比城市里见过的所有星星加起来还要亮。</p>
+    <p>三毛说过，她每想你一次，天上就落下一粒沙。我想，如果这是真的，那撒哈拉也不过如此吧。</p>
+  </div>
+</section>
+
+<!-- ═══ IMAGE ═══ -->
+<div class="it it-full fi">
   <img src="https://images.unsplash.com/photo-1549388604-817d15aa0110?w=1400&q=80" alt="沙丘日落" loading="lazy">
-  <div class="ib-ov"></div>
-  <div class="ib-poem">天际燃烧的那一刻，整个沙漠都在呼吸</div>
+</div>
+<div class="it-cap">
+  <div class="it-cap-title">天际燃烧</div>
+  <div class="it-cap-text">日落时分，整片沙漠像被点燃了。天空是深紫色的，沙子是琥珀色的，而人，是渺小的。</div>
 </div>
 
-<section class="sec" style="background:var(--bg2)">
-  <div class="fi" style="text-align:center">
-    <div class="sec-tag">徒步 · TREKKING</div>
-    <div class="sec-title">三天两夜，脚步丈量沙海</div>
-    <div class="sec-line" style="margin:14px auto 0"></div>
-  </div>
-  <div class="tl">
-    <div class="tl-i fi"><div class="tl-dot"></div><div class="t-time">Day 1 · 上午</div><div class="t-ev">抵达腾格里</div><div class="t-d">从银川出发，穿越贺兰山，进入阿拉善。风沙扑面，苍茫大地铺展至天际。</div></div>
-    <div class="tl-i fi"><div class="tl-dot"></div><div class="t-time">Day 1 · 下午</div><div class="t-ev">首入沙海</div><div class="t-d">沙丘起伏如凝固的海浪，阳光将影子拉得极长。每一步都像在和大地谈判。</div></div>
-    <div class="tl-i fi"><div class="tl-dot"></div><div class="t-time">Day 2</div><div class="t-ev">穿越核心区</div><div class="t-d">翻过一座又一座沙丘，体力与意志反复拉扯。天地之间，只剩下一个念头——走。</div></div>
-    <div class="tl-i fi"><div class="tl-dot"></div><div class="t-time">Day 2 · 夜晚</div><div class="t-ev">沙漠露营</div><div class="t-d">银河低垂，触手可及。篝火旁的人安静下来，抬头便是整个宇宙。</div></div>
-    <div class="tl-i fi"><div class="tl-dot"></div><div class="t-time">Day 3</div><div class="t-ev">走出沙海</div><div class="t-d">最后的日出，将整片沙漠烧成琥珀色。脚印很快被风抚平——好像从未来过，又好像哪里都留下了。</div></div>
+<!-- ═══ POEM ═══ -->
+<section class="poem fi">
+  <div class="poem-line">银河低垂，触手可及，</div>
+  <div class="poem-line">流星划过夜空的那一刻，</div>
+  <div class="poem-line">所有的愿望都变得很轻。</div>
+  <div class="poem-line" style="margin-top:12px"><em>风把答案藏进了沙里，</em></div>
+  <div class="poem-line"><em>只留一片寂静，漫无边际。</em></div>
+  <div class="poem-author">—— 写于腾格里 · 星夜</div>
+</section>
+
+<!-- ═══ CHAPTER 4: 第三天 ═══ -->
+<section class="diary fi">
+  <div class="diary-date">四月 · 清明 · 第三日</div>
+  <div class="diary-title">归途</div>
+  <div class="diary-text">
+    <p>最后的日出，是我见过最美的一次。</p>
+    <p>太阳从沙丘后面升起来的时候，整片沙漠先是变成了深红色，然后是橙色，然后是金色——<strong>像有人在用一支巨大的画笔，一寸一寸地涂过来。</strong></p>
+    <p>回望来路，脚印已经被风抚平了。好像从未来过，又好像哪里都留下了痕迹。</p>
+    <p>三毛说："远方有多远？请你告诉我。"没有人能回答这个问题。但走了腾格里之后，我想，<em>远方不是一个地方，而是一种状态。</em></p>
+    <p>是你在路上的那种状态。</p>
+    <p>是你不再害怕未知的那种状态。</p>
+    <p>是你终于承认，自己比想象中更勇敢的那种状态。</p>
   </div>
 </section>
 
-<section class="sec" style="padding-top:0;padding-bottom:48px">
-  <div class="stats">
-    <div class="stat fi"><div class="stat-n">3</div><div class="stat-l">天</div></div>
-    <div class="stat fi fi-d1"><div class="stat-n">50+</div><div class="stat-l">公里</div></div>
-    <div class="stat fi fi-d2"><div class="stat-n">4.3万</div><div class="stat-l">km²</div></div>
+<!-- ═══ PHOTOS 4-6 ═══ -->
+<div class="it it-full fi">
+  <img src="photo4.jpg" alt="腾格里实拍" loading="lazy">
+</div>
+<div class="it-cap">
+  <div class="it-cap-title">四郎带你探索 · 行者笔记</div>
+  <div class="it-cap-text">风过沙丘，留下一道光的痕迹。风从不回头，沙从不抱怨，它们只是一遍又一遍地，将大地雕琢成最温柔的模样。</div>
+</div>
+
+<div class="it it-full fi">
+  <img src="photo5.jpg" alt="腾格里实拍" loading="lazy">
+</div>
+<div class="it-cap">
+  <div class="it-cap-title">行者笔记 · 心跳</div>
+  <div class="it-cap-text">天地之间，只剩脚步与心跳。汗水渗入沙中，像一场无声的对话——大地接住了疲惫，又把力量悄悄还给了你。</div>
+</div>
+
+<div class="it it-full fi">
+  <img src="photo6.jpg" alt="腾格里实拍" loading="lazy">
+</div>
+<div class="it-cap">
+  <div class="it-cap-title">行者笔记 · 另一个自己</div>
+  <div class="it-cap-text">走得足够远的时候，你会发现最陌生的风景，其实是内心深处从未到过的地方。</div>
+</div>
+
+<!-- ═══ STATS ═══ -->
+<section class="ch" style="padding-top:24px;padding-bottom:24px">
+  <div class="nums">
+    <div class="num fi"><div class="num-v">3</div><div class="num-l">天</div></div>
+    <div class="num fi fi-d1"><div class="num-v">50+</div><div class="num-l">公里</div></div>
+    <div class="num fi fi-d2"><div class="num-v">4.3万</div><div class="num-l">km²</div></div>
   </div>
 </section>
 
-<div class="ib">
+<!-- ═══ STANDALONE QUOTE ═══ -->
+<div class="sq fi">
+  <div class="sq-text"><em>不问终点，不问归途。</em><br>安静地走，路会自己出现。</div>
+</div>
+
+<!-- ═══ IMAGE ═══ -->
+<div class="it it-full fi">
   <img src="https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=1400&q=80" alt="沙漠远景" loading="lazy">
-  <div class="ib-ov"></div>
-  <div class="ib-poem">无边的远方，是心出发的地方</div>
+</div>
+<div class="it-cap">
+  <div class="it-cap-title">无边的远方</div>
+  <div class="it-cap-text">有些地方，你去一次就够了。因为离开之后，它就住进了你心里。</div>
 </div>
 
-<section class="gal">
-  <div class="gal-head fi">
-    <div class="sec-tag">实拍 · MOMENTS</div>
-    <div class="sec-title">旅途掠影</div>
-    <div class="sec-line"></div>
-  </div>
-
-  <div class="gal-item gal-full fi">
-    <img src="photo1.jpg" alt="腾格里实拍" loading="lazy">
-    <div class="gal-ov">
-      <div class="gal-tag">四郎带你探索 · DAY 1</div>
-      <div class="gal-title">一步一沙，皆是远方</div>
-      <div class="gal-poem">脚下的每一粒沙，都承载着千年的风声。在这片没有边界的天地间，我们终于学会了——不问终点，只管前行。</div>
-    </div>
-  </div>
-
-  <div class="gal-duo">
-    <div class="gal-item fi fi-d1">
-      <img src="photo2.jpg" alt="腾格里实拍" loading="lazy">
-      <div class="gal-ov">
-        <div class="gal-tag">DAY 2</div>
-        <div class="gal-title">沙海之上，天地一线</div>
-        <div class="gal-poem">风将沙丘塑成诗的形状，阳光在每一道褶皱里写下金色的句子。</div>
-      </div>
-    </div>
-    <div class="gal-item fi fi-d2">
-      <img src="photo3.jpg" alt="腾格里实拍" loading="lazy">
-      <div class="gal-ov">
-        <div class="gal-tag">DAY 3</div>
-        <div class="gal-title">落日将沙海染成金色的海</div>
-        <div class="gal-poem">每一粒沙，都记得你来过的样子。</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="gal-item gal-full fi">
-    <img src="photo4.jpg" alt="腾格里实拍" loading="lazy">
-    <div class="gal-ov">
-      <div class="gal-tag">四郎带你探索 · 行者笔记</div>
-      <div class="gal-title">风过沙丘，留下一道光的痕迹</div>
-      <div class="gal-poem">风从不回头，沙从不抱怨，它们只是一遍又一遍地，将大地雕琢成最温柔的模样。</div>
-    </div>
-  </div>
-
-  <div class="gal-duo">
-    <div class="gal-item fi fi-d1">
-      <img src="photo5.jpg" alt="腾格里实拍" loading="lazy">
-      <div class="gal-ov">
-        <div class="gal-tag">行者笔记</div>
-        <div class="gal-title">天地之间，只剩脚步与心跳</div>
-        <div class="gal-poem">大地接住了疲惫，又把力量悄悄还给了你。</div>
-      </div>
-    </div>
-    <div class="gal-item fi fi-d2">
-      <img src="photo6.jpg" alt="腾格里实拍" loading="lazy">
-      <div class="gal-ov">
-        <div class="gal-tag">行者笔记</div>
-        <div class="gal-title">沙漠深处，藏着另一个自己</div>
-        <div class="gal-poem">最陌生的风景，是内心从未到过的地方。</div>
-      </div>
-    </div>
+<!-- ═══ SCENIC STRIP ═══ -->
+<section class="ch" style="padding-bottom:16px">
+  <div class="ch-head fi">
+    <div class="ch-num">肆</div>
+    <div class="ch-title">四郎的镜头</div>
   </div>
 </section>
-
-<section class="sec" style="background:var(--bg2)">
-  <div class="fi" style="text-align:center">
-    <div class="sec-tag">风景 · SCENIC</div>
-    <div class="sec-title">四郎的镜头</div>
-    <div class="sec-line" style="margin:14px auto 0"></div>
-  </div>
-</section>
-<div class="sc-grid">
-  <div class="sc-card tall fi">
-    <img src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=800&q=80" alt="日出" loading="lazy">
-    <div class="sc-ov"><div class="sc-text">「日出时分，整片沙漠被点燃，像一场无声的盛宴。」</div></div>
-  </div>
-  <div class="sc-card fi fi-d1">
-    <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80" alt="公路" loading="lazy">
-    <div class="sc-ov"><div class="sc-text">「公路尽头，是另一片沙海的开始。」</div></div>
-  </div>
-  <div class="sc-card fi fi-d2">
-    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&q=80" alt="星空" loading="lazy">
-    <div class="sc-ov"><div class="sc-text">「银河不再是传说，而是每晚的日常。」</div></div>
-  </div>
-  <div class="sc-card fi fi-d3">
-    <img src="https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?w=800&q=80" alt="沙纹" loading="lazy">
-    <div class="sc-ov"><div class="sc-text">「风是最好的艺术家，沙是最好的画布。」</div></div>
-  </div>
+<div class="strip">
+  <div class="s-item"><img src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=800&q=80" alt="日出" loading="lazy"><div class="s-cap"><span>「日出时分，整片沙漠被点燃，像一场无声的盛宴。」</span></div></div>
+  <div class="s-item"><img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80" alt="公路" loading="lazy"><div class="s-cap"><span>「公路尽头，是另一片沙海的开始。而所有的开始，都通向远方。」</span></div></div>
+  <div class="s-item"><img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&q=80" alt="星空" loading="lazy"><div class="s-cap"><span>「在这里，银河不再是传说。它是头顶，是脚下，是整个宇宙。」</span></div></div>
+  <div class="s-item"><img src="https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?w=800&q=80" alt="沙纹" loading="lazy"><div class="s-cap"><span>「风是最好的艺术家，沙是最好的画布。每一次风吹过，都是一幅新作。」</span></div></div>
 </div>
 
-<section class="exp fi">
-  <div class="exp-title">四郎带你<em>探索</em></div>
-  <p class="exp-body">
-    世界很大，大到我们穷尽一生也走不完。<br>
-    但每一步，都算数。<br><br>
-    <strong>四郎，一个用脚步丈量世界的行者。</strong><br>
-    用心感受每一片土地的温度，<br>
-    用镜头留住每一个值得铭记的瞬间。<br><br>
-    这不是旅行攻略，<br>
-    这是一个人，和一片沙漠的故事。
-  </p>
-  <div class="exp-btn">
-    更多探索
-    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+<!-- ═══ CHAPTER 5: 后记 ═══ -->
+<section class="ch fi" style="background:var(--bg2)">
+  <div class="ch-head">
+    <div class="ch-num">伍</div>
+    <div class="ch-title">后记 · 四郎带你探索</div>
+  </div>
+  <div class="prose">
+    <p>回来以后，很多人问我："沙漠好玩吗？"</p>
+    <p>我说不好玩。真的不好玩。</p>
+    <p>没有空调，没有WiFi，走不完的路，晒不完的太阳，脚底的水泡，嘴唇的干裂。每天累到倒头就睡，早上又被冻醒。</p>
+    <p><strong>但我想再去一次。</strong></p>
+    <p>因为在那三天里，我第一次真正安静下来。没有手机震动，没有消息提醒，没有"在吗"和"收到请回复"。只有风声、脚步声和自己心跳的声音。</p>
+    <p>三毛在撒哈拉的时候说：<em>"生命的过程，无论是阳春白雪，青菜豆腐，我都得尝尝是什么滋味。"</em></p>
+    <p>我想，我理解她了。</p>
+    <p>沙漠教会我最重要的事——<strong>你不需要征服什么，你只需要走过去。</strong>走过去，然后你会发现，自己比自己以为的更结实，世界比自己以为的更辽阔。</p>
+    <p>这，就是"四郎带你探索"的意义。</p>
+    <p>不是告诉你哪里好玩，不是给你一份攻略。而是想让你知道：<em>有些路，值得你亲自去走。</em></p>
   </div>
 </section>
 
-<section class="night fi">
-  <div class="sec-tag">星河 · STARRY</div>
-  <div class="sec-title" style="margin-top:8px">星河入梦</div>
-  <p class="sec-body" style="margin:16px auto 0;text-align:center;color:var(--dim)">远离城市的灯光，才真正看见了星星。</p>
-  <div class="np">
-    银河低垂，触手可及，<br>
-    流星划过夜空的那一刻，<br>
-    所有的愿望都变得很轻。<br><br>
-    <em>风把答案藏进了沙里，</em><br>
-    <em>只留一片寂静，漫无边际。</em>
-  </div>
-</section>
+<!-- ═══ ENDING ═══ -->
+<div class="sq fi">
+  <div class="sq-text"><em>我们翻越的不只是沙丘，</em><br>更是心里的那座山。</div>
+</div>
 
-<section class="cls fi">
-  <div class="sec-tag" style="text-align:center;color:var(--dim)">尾声 · EPILOGUE</div>
-  <p class="cls-text">
-    我们翻越的不只是沙丘，<br>
-    更是心里的那座山。<br><br>
-    <em>下一站，四郎带你继续出发。</em>
-  </p>
-  <div class="cls-dot"></div>
-  <div class="cls-sig">腾格里 · 2026 清明</div>
+<section class="end fi">
+  <div class="end-text">下一站，四郎带你<em>继续出发</em></div>
+  <div class="end-sig">腾格里 · 2026 清明</div>
 </section>
 
 <footer class="ft">
@@ -360,10 +356,10 @@ body{font-family:'Noto Serif SC',serif;background:var(--bg);color:var(--text);ov
 
 <script>
 window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('ld').classList.add('out')},600)});
-const obs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('vis')})},{threshold:.08,rootMargin:'0px 0px -20px 0px'});
-document.querySelectorAll('.fi,.tl-i,.stat,.gal-item,.sc-card').forEach(el=>obs.observe(el));
+const obs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('vis')})},{threshold:.06,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
 let t=false;
-window.addEventListener('scroll',()=>{if(!t){requestAnimationFrame(()=>{const y=window.pageYOffset;const h=document.querySelector('.hero-bg img');if(h)h.style.transform='translateY('+y*.15+'px)';document.querySelectorAll('.ib img').forEach(img=>{const r=img.parentElement.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)img.style.transform='translateY('+r.top*.08+'px)'});t=false})}t=true},{passive:true});
+window.addEventListener('scroll',()=>{if(!t){requestAnimationFrame(()=>{const y=window.pageYOffset;const bg=document.querySelector('.cover-bg img');if(bg)bg.style.transform='scale('+(1+y*.0001)+') translateY('+y*.12+'px)';t=false})}t=true},{passive:true});
 </script>
 </body>
 </html>
