@@ -31,6 +31,9 @@ a:hover{color:#f0d89a}
 .side-value span{display:block}
 .tech-tags{display:flex;flex-wrap:wrap;gap:6px}
 .tech-tag{font-size:11px;padding:3px 10px;background:var(--gold-dim);color:var(--gold);border-radius:3px;font-weight:500}
+.scroll-hint{display:none;text-align:center;padding:20px 0 8px;color:var(--text3);font-size:11px;letter-spacing:1px}
+.scroll-hint svg{display:block;margin:8px auto 0;animation:bounce 1.5s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 
 /* Main */
 .main{margin-left:380px;padding:48px 56px;max-width:900px}
@@ -83,6 +86,7 @@ a:hover{color:#f0d89a}
   .sidebar{position:relative;width:100%;height:auto;padding:32px 24px;border-right:none;border-bottom:1px solid var(--line)}
   .main{margin-left:0;padding:32px 24px}
   .section::before{display:none}
+  .scroll-hint{display:block}
 }
 @media(max-width:480px){
   .work-head{flex-direction:column}
@@ -144,6 +148,10 @@ a:hover{color:#f0d89a}
       <span>期望薪资：7.5K – 8K</span>
       <span>到岗时间：随时</span>
     </div>
+  </div>
+  <div class="scroll-hint">
+    <span>向下滑动查看</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
   </div>
 </aside>
 
