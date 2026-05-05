@@ -2,364 +2,329 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0,user-scalable=yes">
-<title>四郎带你探索 · 腾格里沙漠</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康玉龙 · PHP后端开发工程师</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Noto+Serif+SC:wght@200;300;400;600;700&family=Liu+Jian+Mao+Cao&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#1c1915;--bg2:#252019;--parch:#f4ecd8;--parch2:#e8dcc4;--ink:#3a2f24;--ink2:#6b5d4f;--gold:#c4944a;--gold2:#dbb978;--blush:#c4867a}
-html{scroll-behavior:smooth}
-body{font-family:'Noto Serif SC',serif;background:var(--bg);color:var(--parch2);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.9;font-weight:300}
+:root{
+  --bg:#0a0a0f;--bg2:#111118;--bg3:#1a1a24;
+  --gold:#d4a853;--gold-dim:rgba(212,168,83,.15);
+  --text:#e8e4dc;--text2:#a09880;--text3:#6a6278;
+  --line:rgba(212,168,83,.12);
+}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-serif;font-weight:300;line-height:1.8;overflow-x:hidden}
+a{color:var(--gold);text-decoration:none;transition:color .3s}
+a:hover{color:#f0d89a}
 
-/* ── Loader ── */
-.ld{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 1s,visibility 1s}
-.ld.out{opacity:0;visibility:hidden}
-.ld-title{font-family:'Liu Jian Mao Cao',cursive;font-size:28px;color:var(--gold2);letter-spacing:4px}
-.ld-sub{font-size:9px;letter-spacing:8px;color:var(--ink2);margin-top:8px;opacity:.5}
-.ld-bar{width:50px;height:1px;background:rgba(196,148,74,.15);margin-top:24px;overflow:hidden}
-.ld-bar i{display:block;width:100%;height:100%;background:var(--gold2);animation:slide 2s ease infinite}
-@keyframes slide{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+/* Sidebar */
+.sidebar{position:fixed;top:0;left:0;width:380px;height:100vh;background:var(--bg2);border-right:1px solid var(--line);padding:48px 40px;display:flex;flex-direction:column;z-index:10;overflow-y:auto}
+.avatar{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,var(--gold-dim),var(--gold-dim));display:flex;align-items:center;justify-content:center;font-size:32px;color:var(--gold);margin-bottom:24px;border:2px solid var(--gold-dim)}
+.name{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#fff;letter-spacing:1px;margin-bottom:4px}
+.title-en{font-size:11px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:20px}
+.tag-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.tag{font-size:11px;padding:4px 12px;border:1px solid var(--line);border-radius:20px;color:var(--text2)}
+.side-section{margin-bottom:24px}
+.side-label{font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.side-value{font-size:13px;color:var(--text2);line-height:1.8}
+.side-value a{font-size:13px}
+.side-value span{display:block}
+.tech-tags{display:flex;flex-wrap:wrap;gap:6px}
+.tech-tag{font-size:11px;padding:3px 10px;background:var(--gold-dim);color:var(--gold);border-radius:3px;font-weight:500}
 
-/* ── Cover ── */
-.cover{position:relative;height:100vh;min-height:100dvh;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.cover-bg{position:absolute;inset:0}
-.cover-bg img{width:100%;height:100%;object-fit:cover;filter:sepia(.25) brightness(.3) saturate(1.2)}
-.cover-ov{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(28,25,21,.3) 0%,rgba(28,25,21,.85) 100%)}
-.cover-inner{position:relative;z-index:2;text-align:center;padding:0 32px}
-.cover-line{width:1px;height:48px;background:linear-gradient(var(--gold2),transparent);margin:0 auto 32px;opacity:.4}
-.cover-title{font-family:'Liu Jian Mao Cao',cursive;font-size:clamp(52px,16vw,90px);color:var(--parch);letter-spacing:12px;line-height:1.15;text-shadow:0 2px 40px rgba(196,148,74,.15)}
-.cover-en{font-family:'ZCOOL XiaoWei',serif;font-size:10px;letter-spacing:10px;color:var(--gold);opacity:.5;margin-top:12px;text-transform:uppercase}
-.cover-quote{margin-top:36px;font-size:clamp(13px,3vw,15px);color:var(--parch2);font-weight:200;letter-spacing:2px;line-height:2.4;font-style:italic;opacity:.7;max-width:380px;margin-left:auto;margin-right:auto}
-.cover-arrow{position:absolute;bottom:6vh;left:50%;transform:translateX(-50%);z-index:2}
-.cover-arrow i{display:block;width:1px;height:36px;background:linear-gradient(transparent,var(--gold));margin:0 auto;animation:pulse 2.5s ease infinite}
-@keyframes pulse{0%,100%{opacity:.2;transform:scaleY(.8)}50%{opacity:.6;transform:scaleY(1)}}
+/* Main */
+.main{margin-left:380px;padding:48px 56px;max-width:900px}
+.section{margin-bottom:56px;position:relative}
+.section::before{content:'';position:absolute;left:-28px;top:6px;width:8px;height:8px;border:1.5px solid var(--gold);transform:rotate(45deg);background:var(--bg)}
+.section-title{font-size:13px;color:var(--gold);letter-spacing:4px;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.section-title::after{content:'';flex:1;height:1px;background:var(--line)}
 
-/* ── Chapter ── */
-.ch{padding:64px 28px}
-.ch-head{margin-bottom:40px}
-.ch-num{font-family:'Liu Jian Mao Cao',cursive;font-size:48px;color:var(--gold);opacity:.2;line-height:1}
-.ch-title{font-family:'ZCOOL XiaoWei',serif;font-size:clamp(18px,4.5vw,22px);color:var(--parch);letter-spacing:4px;margin-top:-8px}
+/* Summary */
+.summary{font-size:14px;color:var(--text2);line-height:2;margin-bottom:48px;max-width:680px}
 
-/* ── Prose ── */
-.prose{font-size:clamp(14px,3.2vw,16px);line-height:2.6;color:var(--parch2);font-weight:300;letter-spacing:1px}
-.prose p{margin-bottom:20px;text-indent:2em}
-.prose strong{color:var(--parch);font-weight:400}
-.prose em{color:var(--gold2);font-style:normal}
+/* Work */
+.work-card{background:var(--bg2);border:1px solid var(--line);border-radius:4px;padding:28px;margin-bottom:20px;transition:border-color .3s}
+.work-card:hover{border-color:rgba(212,168,83,.3)}
+.work-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.work-company{font-size:17px;font-weight:500;color:#fff}
+.work-role{font-size:12px;color:var(--gold);margin-top:2px}
+.work-date{font-size:12px;color:var(--text3);white-space:nowrap}
+.work-desc{font-size:13px;color:var(--text2);line-height:1.9}
+.work-desc li{list-style:none;position:relative;padding-left:18px;margin-bottom:6px}
+.work-desc li::before{content:'';position:absolute;left:0;top:10px;width:6px;height:1px;background:var(--gold)}
 
-/* ── Standalone Quote ── */
-.sq{padding:48px 28px;text-align:center;position:relative}
-.sq::before,.sq::after{content:'';position:absolute;left:50%;transform:translateX(-50%);width:24px;height:1px;background:var(--gold);opacity:.2}
-.sq::before{top:0}.sq::after{bottom:0}
-.sq-text{font-family:'Liu Jian Mao Cao',cursive;font-size:clamp(20px,5vw,26px);line-height:2;color:var(--parch);letter-spacing:3px}
-.sq-text em{color:var(--gold2)}
+/* Projects */
+.proj-card{background:var(--bg2);border:1px solid var(--line);border-left:2px solid var(--gold);border-radius:0 4px 4px 0;padding:24px 28px;margin-bottom:16px}
+.proj-name{font-size:15px;font-weight:500;color:#fff;margin-bottom:4px}
+.proj-meta{font-size:11px;color:var(--text3);margin-bottom:12px;letter-spacing:.5px}
+.proj-desc{font-size:13px;color:var(--text2);line-height:1.9}
+.proj-desc li{list-style:none;position:relative;padding-left:18px;margin-bottom:5px}
+.proj-desc li::before{content:'';position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:var(--gold-dim);border:1px solid var(--gold)}
 
-/* ── Image with Text Block ── */
-.it{margin-bottom:6px;position:relative;overflow:hidden}
-.it img{width:100%;display:block}
-.it-full{height:55vh;min-height:280px}
-.it-full img{width:100%;height:100%;object-fit:cover}
-.it-cap{padding:16px 28px 12px}
-.it-cap-title{font-family:'ZCOOL XiaoWei',serif;font-size:13px;color:var(--gold);letter-spacing:2px}
-.it-cap-text{font-size:12px;color:var(--ink2);letter-spacing:.5px;line-height:2.2;margin-top:4px;font-weight:300;font-style:italic}
+/* Education */
+.edu-card{display:flex;justify-content:space-between;align-items:flex-start;padding:20px 0;border-bottom:1px solid var(--line)}
+.edu-school{font-size:15px;font-weight:500;color:#fff}
+.edu-major{font-size:13px;color:var(--text2);margin-top:2px}
+.edu-degree{font-size:12px;color:var(--text3)}
+.edu-date{font-size:12px;color:var(--text3);white-space:nowrap}
 
-/* ── Poem Block ── */
-.poem{padding:40px 28px;text-align:center;background:var(--bg2)}
-.poem-line{font-family:'Liu Jian Mao Cao',cursive;font-size:clamp(16px,4vw,20px);color:var(--parch);letter-spacing:3px;line-height:2.8}
-.poem-line em{color:var(--gold2)}
-.poem-author{margin-top:20px;font-size:10px;color:var(--ink2);letter-spacing:4px;font-style:italic}
+/* Skills */
+.skill-group{margin-bottom:20px}
+.skill-label{font-size:12px;color:var(--gold);margin-bottom:8px;letter-spacing:1px}
+.skill-items{display:flex;flex-wrap:wrap;gap:8px}
+.skill-item{font-size:12px;padding:5px 14px;border:1px solid var(--line);border-radius:3px;color:var(--text2);transition:all .3s}
+.skill-item:hover{border-color:var(--gold);color:var(--gold)}
 
-/* ── Diary Style ── */
-.diary{padding:56px 28px;border-top:1px solid rgba(196,148,74,.06);border-bottom:1px solid rgba(196,148,74,.06)}
-.diary-date{font-family:'ZCOOL XiaoWei',serif;font-size:11px;color:var(--gold);letter-spacing:4px;margin-bottom:20px;display:flex;align-items:center;gap:10px}
-.diary-date::before{content:'';width:20px;height:1px;background:var(--gold);opacity:.4}
-.diary-title{font-family:'ZCOOL XiaoWei',serif;font-size:clamp(16px,4vw,19px);color:var(--parch);letter-spacing:2px;margin-bottom:16px}
-.diary-text{font-size:clamp(13px,3vw,14px);line-height:2.6;color:var(--parch2);font-weight:300;letter-spacing:.5px}
-.diary-text p{margin-bottom:14px;text-indent:2em}
-.diary-text strong{color:var(--parch);font-weight:400}
+/* Footer */
+.footer{margin-top:48px;padding-top:24px;border-top:1px solid var(--line);font-size:12px;color:var(--text3);text-align:center}
 
-/* ── Gallery Masonry ── */
-.gal{padding:56px 24px}
-.gal-head{text-align:center;margin-bottom:32px}
-.gal-masonry{columns:2;column-gap:6px}
-.gal-masonry .g-item{break-inside:avoid;margin-bottom:6px;position:relative;overflow:hidden;border-radius:2px}
-.gal-masonry .g-item img{width:100%;display:block}
-.gal-masonry .g-item .g-ov{position:absolute;bottom:0;left:0;right:0;padding:12px 14px 10px;background:linear-gradient(transparent,rgba(28,25,21,.8));opacity:0;transition:opacity .4s}
-.gal-masonry .g-item:active .g-ov{opacity:1}
-.gal-masonry .g-item .g-ov span{font-size:10px;color:var(--parch2);font-weight:300;letter-spacing:.5px;line-height:1.6}
-@media(max-width:767px){.gal-masonry .g-item .g-ov{opacity:1}}
+/* Mobile */
+@media(max-width:900px){
+  .sidebar{position:relative;width:100%;height:auto;padding:32px 24px;border-right:none;border-bottom:1px solid var(--line)}
+  .main{margin-left:0;padding:32px 24px}
+  .section::before{display:none}
+}
+@media(max-width:480px){
+  .work-head{flex-direction:column}
+  .main{padding:24px 16px}
+}
 
-/* ── Numbers ── */
-.nums{display:flex;gap:1px;padding:0 28px;margin:0 28px;background:rgba(196,148,74,.08)}
-.num{flex:1;background:var(--bg);padding:32px 8px;text-align:center}
-.num-v{font-family:'ZCOOL XiaoWei',serif;font-size:clamp(28px,8vw,40px);color:var(--parch);letter-spacing:1px}
-.num-l{font-size:9px;color:var(--ink2);letter-spacing:4px;margin-top:6px}
-
-/* ── Scenic Strip ── */
-.strip{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:4px;padding:0 28px}
-.strip::-webkit-scrollbar{display:none}
-.strip .s-item{flex:0 0 70vw;max-width:320px;scroll-snap-align:start;position:relative;border-radius:4px;overflow:hidden;height:50vh;min-height:240px}
-.strip .s-item img{width:100%;height:100%;object-fit:cover}
-.strip .s-item .s-cap{position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(transparent,rgba(28,25,21,.8))}
-.strip .s-item .s-cap span{font-size:11px;color:var(--parch2);font-weight:300;font-style:italic;line-height:1.7}
-
-/* ── Closing ── */
-.end{padding:88px 28px 96px;text-align:center;position:relative}
-.end::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:48px;background:linear-gradient(transparent,var(--gold),transparent);opacity:.2}
-.end-text{font-family:'Liu Jian Mao Cao',cursive;font-size:clamp(20px,5vw,28px);color:var(--parch);letter-spacing:4px;line-height:2.4}
-.end-text em{color:var(--gold2)}
-.end-sig{margin-top:32px;font-size:9px;color:var(--ink2);letter-spacing:6px}
-
-/* ── Footer ── */
-.ft{padding:20px 28px;text-align:center}
-.ft-brand{font-family:'ZCOOL XiaoWei',serif;font-size:11px;color:var(--gold);letter-spacing:6px;opacity:.4}
-.ft-sub{font-size:8px;color:var(--ink2);letter-spacing:3px;margin-top:6px}
-
-/* ── FI ── */
-.fi{opacity:0;transform:translateY(14px);transition:all .8s cubic-bezier(.22,1,.36,1)}
-.fi.vis{opacity:1;transform:translateY(0)}
-.fi-d1{transition-delay:.1s}.fi-d2{transition-delay:.15s}
-
-@media(min-width:768px){
-  .ch{padding:88px 14%}
-  .gal-masonry{columns:3}
-  .strip .s-item{flex:0 0 40vw;max-width:400px}
+/* Print */
+@media print{
+  body{background:#fff;color:#222}
+  :root{--bg:#fff;--bg2:#f8f8f8;--text:#222;--text2:#555;--line:#ddd;--gold:#8B6914}
+  .sidebar{background:#f0ede6;position:relative;width:100%;height:auto;flex-direction:row;flex-wrap:wrap;gap:16px}
+  .main{margin-left:0}
+  .section::before{display:none}
+  .footer{display:none}
 }
 </style>
 </head>
 <body>
 
-<!-- LOADER -->
-<div class="ld" id="ld"><div class="ld-title">四郎带你探索</div><div class="ld-sub">腾格里沙漠</div><div class="ld-bar"><i></i></div></div>
-
-<!-- ═══ COVER ═══ -->
-<section class="cover">
-  <div class="cover-bg"><img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1600&q=80" alt="腾格里"></div>
-  <div class="cover-ov"></div>
-  <div class="cover-inner fi">
-    <div class="cover-line"></div>
-    <h1 class="cover-title">腾格里</h1>
-    <div class="cover-en">The Tengger Desert · 2026</div>
-    <p class="cover-quote">每想你一次，天上飘落一粒沙，从此形成了撒哈拉。—— 三毛</p>
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="avatar">康</div>
+  <div class="name">康玉龙</div>
+  <div class="title-en">PHP Backend Developer</div>
+  <div class="tag-list">
+    <span class="tag">5年经验</span>
+    <span class="tag">千万级用户</span>
+    <span class="tag">AI辅助开发</span>
+    <span class="tag">西安·长安区</span>
   </div>
-  <div class="cover-arrow"><i></i></div>
-</section>
 
-<!-- ═══ CHAPTER 1: 出发 ═══ -->
-<section class="ch fi">
-  <div class="ch-head">
-    <div class="ch-num">壹</div>
-    <div class="ch-title">出发，是因为远方在召唤</div>
+  <div class="side-section">
+    <div class="side-label">联系方式</div>
+    <div class="side-value">
+      <span>📱 187-9298-9751</span>
+      <span>📧 1963437949@qq.com</span>
+      <span>📍 西安·长安区</span>
+      <span>🐙 <a href="https://github.com/kangzicheng" target="_blank">github.com/kangzicheng</a></span>
+    </div>
   </div>
-  <div class="prose">
-    <p>有人问我为什么要去沙漠。我想了很久，说不出一个像样的理由。</p>
-    <p>大概是因为，城市的日子过久了，人会被慢慢磨成一块光滑的石头——不再有棱角，不再有疼痛，也不再知道自己真正的样子。</p>
-    <p><strong>而沙漠不会骗你。</strong>它不会给你虚假的舒适，也不会替你回答任何问题。它只是静静地摊开在那里，五十公里，无边无际。</p>
-    <p>你走或不走，它都在。但如果你走了，你会遇见一些东西——<em>关于自己，关于天地，关于那些被遗忘了很久的、真正重要的事。</em></p>
+
+  <div class="side-section">
+    <div class="side-label">技术栈</div>
+    <div class="tech-tags">
+      <span class="tech-tag">PHP 7/8</span>
+      <span class="tech-tag">ThinkPHP 6</span>
+      <span class="tech-tag">Laravel</span>
+      <span class="tech-tag">MySQL</span>
+      <span class="tech-tag">Redis</span>
+      <span class="tech-tag">Docker</span>
+      <span class="tech-tag">AI API</span>
+      <span class="tech-tag">Linux</span>
+    </div>
   </div>
-</section>
 
-<!-- ═══ IMAGE ═══ -->
-<div class="it it-full fi">
-  <img src="https://images.unsplash.com/photo-1489493887464-892be6d1daae?w=1400&q=80" alt="沙纹" loading="lazy">
-</div>
-<div class="it-cap">
-  <div class="it-cap-title">风的指纹</div>
-  <div class="it-cap-text">每一道沙纹，都是风写给大地的情书。没有署名，没有日期，但每一封都被认真读过。</div>
-</div>
-
-<!-- ═══ STANDALONE QUOTE ═══ -->
-<div class="sq fi">
-  <div class="sq-text"><em>沙漠的美，在于它什么也不给你，</em><br>却又好像什么都给了。</div>
-</div>
-
-<!-- ═══ CHAPTER 2: 第一天 ═══ -->
-<section class="diary fi">
-  <div class="diary-date">四月 · 清明 · 第一日</div>
-  <div class="diary-title">初见沙海</div>
-  <div class="diary-text">
-    <p>从银川出发，翻过贺兰山，进入阿拉善的那一刻，车窗外的风景突然变了。绿色消失，戈壁出现，然后是沙——一望无际的、安静得不讲道理的沙。</p>
-    <p><strong>脚踩上去的瞬间，我明白了什么叫"脚踏实地"。</strong>城市里的路太硬了，硬到让人忘了脚掌原来是有感觉的。而沙漠是软的，每一步都陷进去一点，像大地在轻轻接住你。</p>
-    <p>下午开始徒步。沙丘起伏如凝固的海浪，阳光将影子拉得极长。走了大约十公里，肩膀开始酸痛，嘴唇干裂，鞋里灌满了细沙。</p>
-    <p>但我不想停下来。因为每翻过一座沙丘，看到的景色都不一样——<em>新的光影，新的线条，新的沉默。</em></p>
+  <div class="side-section">
+    <div class="side-label">求职意向</div>
+    <div class="side-value">
+      <span>PHP后端开发工程师</span>
+      <span>期望城市：西安（长安区优先）</span>
+      <span>期望薪资：7.5K – 8K</span>
+      <span>到岗时间：随时</span>
+    </div>
   </div>
-</section>
+</aside>
 
-<!-- ═══ PHOTOS 1-3 ═══ -->
-<div class="it it-full fi">
-  <img src="photo1.jpg" alt="腾格里实拍" loading="lazy">
-</div>
-<div class="it-cap">
-  <div class="it-cap-title">四郎带你探索 · DAY 1</div>
-  <div class="it-cap-text">一步一沙，皆是远方。脚下的每一粒沙，都承载着千年的风声。</div>
-</div>
+<!-- Main Content -->
+<main class="main">
 
-<div class="it it-full fi">
-  <img src="photo2.jpg" alt="腾格里实拍" loading="lazy">
-</div>
-<div class="it-cap">
-  <div class="it-cap-title">DAY 2 · 沙海之上</div>
-  <div class="it-cap-text">风将沙丘塑成诗的形状，阳光在每一道褶皱里写下金色的句子。站在沙脊上，世界安静得只剩呼吸。</div>
-</div>
+  <!-- Summary -->
+  <p class="summary">
+    5年PHP后端开发经验，曾参与欧莱雅集团兰蔻/YSL会员小程序核心模块开发，
+    系统服务千万级用户，日常活跃峰值破百万。现任职于西安康融实业，独立承担核心模块开发，
+    并在项目中主导大模型API接入，将AI能力落地于智能客服业务场景。
+    日常使用 WorkBuddy、通义灵码等AI辅助工具提升编码效率。
+  </p>
 
-<div class="it it-full fi">
-  <img src="photo3.jpg" alt="腾格里实拍" loading="lazy">
-</div>
-<div class="it-cap">
-  <div class="it-cap-title">DAY 3 · 落日染金</div>
-  <div class="it-cap-text">最后一缕阳光消失在地平线下，每一粒沙，都记得你来过的样子。</div>
-</div>
+  <!-- Work Experience -->
+  <div class="section">
+    <div class="section-title">工作经历</div>
 
-<!-- ═══ CHAPTER 3: 第二天 ═══ -->
-<section class="diary fi">
-  <div class="diary-date">四月 · 清明 · 第二日</div>
-  <div class="diary-title">穿越</div>
-  <div class="diary-text">
-    <p>这是最艰难的一天。</p>
-    <p>翻过一座沙丘，以为到了尽头，结果发现后面还有五座。翻过五座，发现后面还有十座。沙漠就是这样——<strong>它用沉默教你耐心，用辽阔教你谦卑。</strong></p>
-    <p>中午的时候，我坐在沙丘顶上喝水，忽然觉得整片沙漠像一块巨大的琥珀。阳光透过云层洒下来，每一粒沙子都在发光。</p>
-    <p>那一刻，我什么都不想。不想工作，不想手机，不想昨天和明天。脑子里只有一个念头：<em>活着真好。</em></p>
-    <p>夜里露营。篝火点燃的时候，所有人都安静了。抬头，银河低垂，触手可及。星星多得像撒了一地的钻石，随便一颗都比城市里见过的所有星星加起来还要亮。</p>
-    <p>三毛说过，她每想你一次，天上就落下一粒沙。我想，如果这是真的，那撒哈拉也不过如此吧。</p>
+    <div class="work-card">
+      <div class="work-head">
+        <div>
+          <div class="work-company">西安康融实业有限公司</div>
+          <div class="work-role">PHP 后端开发工程师</div>
+        </div>
+        <div class="work-date">2023.03 — 至今</div>
+      </div>
+      <ul class="work-desc">
+        <li>负责企业内部系统（ERP/财务/楼盘管理）及面向用户小程序/App的后端接口开发与维护</li>
+        <li>主导智能客服功能的大模型API接入，搭建统一调用层，支持限流控制与流式响应</li>
+        <li>日常使用 AI 辅助编程工具（WorkBuddy / 通义灵码）提升开发效率</li>
+        <li>参与业务需求评审与技术方案讨论，制定接口规范，推动多个项目按时交付</li>
+        <li>负责线上问题排查与性能优化，保障系统稳定运行</li>
+      </ul>
+    </div>
+
+    <div class="work-card">
+      <div class="work-head">
+        <div>
+          <div class="work-company">畅移（上海）信息科技有限公司</div>
+          <div class="work-role">PHP 后端开发工程师</div>
+        </div>
+        <div class="work-date">2021.07 — 2022.12</div>
+      </div>
+      <ul class="work-desc">
+        <li>参与千万级用户规模系统（欧莱雅集团·兰蔻&YSL会员小程序）后端开发</li>
+        <li>通过 Redis 缓存分层设计，优化高频接口响应速度，降低数据库压力</li>
+        <li>对接微信公众号模板消息与客服消息，实现用户精准触达</li>
+        <li>使用 Docker + Jenkins CI/CD 完成持续集成，支持每周多次安全发布</li>
+        <li>协助测试团队构造接口测试数据，推动测试覆盖率提升</li>
+      </ul>
+    </div>
+
+    <div class="work-card">
+      <div class="work-head">
+        <div>
+          <div class="work-company">西安源点计划信息技术有限公司</div>
+          <div class="work-role">PHP 程序员</div>
+        </div>
+        <div class="work-date">2021.03 — 2021.07</div>
+      </div>
+      <ul class="work-desc">
+        <li>根据业务需求完成 PHP 接口开发与系统功能迭代</li>
+        <li>参与系统测试与 bug 修复，配合各部门完成流程优化</li>
+      </ul>
+    </div>
   </div>
-</section>
 
-<!-- ═══ IMAGE ═══ -->
-<div class="it it-full fi">
-  <img src="https://images.unsplash.com/photo-1549388604-817d15aa0110?w=1400&q=80" alt="沙丘日落" loading="lazy">
-</div>
-<div class="it-cap">
-  <div class="it-cap-title">天际燃烧</div>
-  <div class="it-cap-text">日落时分，整片沙漠像被点燃了。天空是深紫色的，沙子是琥珀色的，而人，是渺小的。</div>
-</div>
+  <!-- Projects -->
+  <div class="section">
+    <div class="section-title">重点项目</div>
 
-<!-- ═══ POEM ═══ -->
-<section class="poem fi">
-  <div class="poem-line">银河低垂，触手可及，</div>
-  <div class="poem-line">流星划过夜空的那一刻，</div>
-  <div class="poem-line">所有的愿望都变得很轻。</div>
-  <div class="poem-line" style="margin-top:12px"><em>风把答案藏进了沙里，</em></div>
-  <div class="poem-line"><em>只留一片寂静，漫无边际。</em></div>
-  <div class="poem-author">—— 写于腾格里 · 星夜</div>
-</section>
+    <div class="proj-card">
+      <div class="proj-name">兰蔻 & 圣罗兰（YSL）会员中心小程序</div>
+      <div class="proj-meta">欧莱雅集团 · SaaS小程序 · PHP/Lumen/Redis/Docker/CI-CD</div>
+      <ul class="proj-desc">
+        <li>项目规模：千万级用户，日活百万</li>
+        <li>负责模块：用户个人中心、会员等级计算引擎、积分兑换、种草中心、空瓶回收、后台数据导出</li>
+        <li>技术实践：设计 Redis 缓存分层策略，有效改善核心接口响应表现</li>
+        <li>消息触达：实现模板消息 + 客服消息双通道推送，提升用户回访率</li>
+      </ul>
+    </div>
 
-<!-- ═══ CHAPTER 4: 第三天 ═══ -->
-<section class="diary fi">
-  <div class="diary-date">四月 · 清明 · 第三日</div>
-  <div class="diary-title">归途</div>
-  <div class="diary-text">
-    <p>最后的日出，是我见过最美的一次。</p>
-    <p>太阳从沙丘后面升起来的时候，整片沙漠先是变成了深红色，然后是橙色，然后是金色——<strong>像有人在用一支巨大的画笔，一寸一寸地涂过来。</strong></p>
-    <p>回望来路，脚印已经被风抚平了。好像从未来过，又好像哪里都留下了痕迹。</p>
-    <p>三毛说："远方有多远？请你告诉我。"没有人能回答这个问题。但走了腾格里之后，我想，<em>远方不是一个地方，而是一种状态。</em></p>
-    <p>是你在路上的那种状态。</p>
-    <p>是你不再害怕未知的那种状态。</p>
-    <p>是你终于承认，自己比想象中更勇敢的那种状态。</p>
+    <div class="proj-card">
+      <div class="proj-name">智能客服大模型接入项目</div>
+      <div class="proj-meta">西安康融实业 · AI能力落地 · PHP/大模型API/Redis</div>
+      <ul class="proj-desc">
+        <li>主导设计与实现：搭建统一的大模型调用层，支持限流控制、异常容错与流式响应</li>
+        <li>落地效果：减少运营人员重复性咨询回复工作量，提升客服响应效率</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-name">千鸟云商 SaaS 系统</div>
+      <div class="proj-meta">快消品电商全链路平台 · PHP/MySQL/Redis/Docker</div>
+      <ul class="proj-desc">
+        <li>负责用户系统、商品管理、采购管理、库存管理、微信模板推送等核心板块接口开发</li>
+        <li>覆盖完整业务闭环：用户登录 → 商品下单 → 采购入库 → 财务对账</li>
+        <li>系统包含：电商系统、ERP、订单分拣系统、仓储系统、财务系统五大子系统</li>
+      </ul>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-name">谷客多·楼盘租赁管理系统</div>
+      <div class="proj-meta">西安电子谷 · 政府配套项目 · PHP/Laravel/MySQL/Redis</div>
+      <ul class="proj-desc">
+        <li>负责物业端登录、楼盘栋座销控展示与入住率计算、客户列表管理及数据导入导出</li>
+        <li>App端实现楼盘入住率数据可视化分析与客户入住审批流程</li>
+      </ul>
+    </div>
   </div>
-</section>
 
-<!-- ═══ PHOTOS 4-6 ═══ -->
-<div class="it it-full fi">
-  <img src="photo4.jpg" alt="腾格里实拍" loading="lazy">
-</div>
-<div class="it-cap">
-  <div class="it-cap-title">四郎带你探索 · 行者笔记</div>
-  <div class="it-cap-text">风过沙丘，留下一道光的痕迹。风从不回头，沙从不抱怨，它们只是一遍又一遍地，将大地雕琢成最温柔的模样。</div>
-</div>
-
-<div class="it it-full fi">
-  <img src="photo5.jpg" alt="腾格里实拍" loading="lazy">
-</div>
-<div class="it-cap">
-  <div class="it-cap-title">行者笔记 · 心跳</div>
-  <div class="it-cap-text">天地之间，只剩脚步与心跳。汗水渗入沙中，像一场无声的对话——大地接住了疲惫，又把力量悄悄还给了你。</div>
-</div>
-
-<div class="it it-full fi">
-  <img src="photo6.jpg" alt="腾格里实拍" loading="lazy">
-</div>
-<div class="it-cap">
-  <div class="it-cap-title">行者笔记 · 另一个自己</div>
-  <div class="it-cap-text">走得足够远的时候，你会发现最陌生的风景，其实是内心深处从未到过的地方。</div>
-</div>
-
-<!-- ═══ STATS ═══ -->
-<section class="ch" style="padding-top:24px;padding-bottom:24px">
-  <div class="nums">
-    <div class="num fi"><div class="num-v">3</div><div class="num-l">天</div></div>
-    <div class="num fi fi-d1"><div class="num-v">50+</div><div class="num-l">公里</div></div>
-    <div class="num fi fi-d2"><div class="num-v">4.3万</div><div class="num-l">km²</div></div>
+  <!-- Skills -->
+  <div class="section">
+    <div class="section-title">技能专长</div>
+    <div class="skill-group">
+      <div class="skill-label">后端开发</div>
+      <div class="skill-items">
+        <span class="skill-item">PHP 7/8（5年）</span>
+        <span class="skill-item">ThinkPHP 6</span>
+        <span class="skill-item">Laravel 8</span>
+        <span class="skill-item">Lumen</span>
+        <span class="skill-item">RESTful API</span>
+        <span class="skill-item">OOP/MVC</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-label">数据库</div>
+      <div class="skill-items">
+        <span class="skill-item">MySQL（索引优化/事务设计/慢查询分析）</span>
+        <span class="skill-item">Redis（缓存/消息队列）</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-label">运维部署</div>
+      <div class="skill-items">
+        <span class="skill-item">Docker</span>
+        <span class="skill-item">Linux/Xshell</span>
+        <span class="skill-item">Nginx</span>
+        <span class="skill-item">Git</span>
+        <span class="skill-item">Jenkins CI/CD</span>
+        <span class="skill-item">Kibana</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-label">AI 工具</div>
+      <div class="skill-items">
+        <span class="skill-item">WorkBuddy（日常主力）</span>
+        <span class="skill-item">通义灵码</span>
+        <span class="skill-item">豆包</span>
+        <span class="skill-item">大模型API接入（OpenAI协议）</span>
+        <span class="skill-item">Prompt工程</span>
+      </div>
+    </div>
   </div>
-</section>
 
-<!-- ═══ STANDALONE QUOTE ═══ -->
-<div class="sq fi">
-  <div class="sq-text"><em>不问终点，不问归途。</em><br>安静地走，路会自己出现。</div>
-</div>
-
-<!-- ═══ IMAGE ═══ -->
-<div class="it it-full fi">
-  <img src="https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=1400&q=80" alt="沙漠远景" loading="lazy">
-</div>
-<div class="it-cap">
-  <div class="it-cap-title">无边的远方</div>
-  <div class="it-cap-text">有些地方，你去一次就够了。因为离开之后，它就住进了你心里。</div>
-</div>
-
-<!-- ═══ SCENIC STRIP ═══ -->
-<section class="ch" style="padding-bottom:16px">
-  <div class="ch-head fi">
-    <div class="ch-num">肆</div>
-    <div class="ch-title">四郎的镜头</div>
+  <!-- Education -->
+  <div class="section">
+    <div class="section-title">教育背景</div>
+    <div class="edu-card">
+      <div>
+        <div class="edu-school">西北大学</div>
+        <div class="edu-major">汉语言文学 · 本科</div>
+      </div>
+      <div class="edu-date">2022.03 — 2024.07</div>
+    </div>
+    <div class="edu-card">
+      <div>
+        <div class="edu-school">西安科技大学</div>
+        <div class="edu-major">电气自动化 · 大专</div>
+      </div>
+      <div class="edu-date">2017.09 — 2020.07</div>
+    </div>
   </div>
-</section>
-<div class="strip">
-  <div class="s-item"><img src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=800&q=80" alt="日出" loading="lazy"><div class="s-cap"><span>「日出时分，整片沙漠被点燃，像一场无声的盛宴。」</span></div></div>
-  <div class="s-item"><img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80" alt="公路" loading="lazy"><div class="s-cap"><span>「公路尽头，是另一片沙海的开始。而所有的开始，都通向远方。」</span></div></div>
-  <div class="s-item"><img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&q=80" alt="星空" loading="lazy"><div class="s-cap"><span>「在这里，银河不再是传说。它是头顶，是脚下，是整个宇宙。」</span></div></div>
-  <div class="s-item"><img src="https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?w=800&q=80" alt="沙纹" loading="lazy"><div class="s-cap"><span>「风是最好的艺术家，沙是最好的画布。每一次风吹过，都是一幅新作。」</span></div></div>
-</div>
 
-<!-- ═══ CHAPTER 5: 后记 ═══ -->
-<section class="ch fi" style="background:var(--bg2)">
-  <div class="ch-head">
-    <div class="ch-num">伍</div>
-    <div class="ch-title">后记 · 四郎带你探索</div>
+  <div class="footer">
+    感谢阅读，期待面谈机会 · 康玉龙 · 2026
   </div>
-  <div class="prose">
-    <p>回来以后，很多人问我："沙漠好玩吗？"</p>
-    <p>我说不好玩。真的不好玩。</p>
-    <p>没有空调，没有WiFi，走不完的路，晒不完的太阳，脚底的水泡，嘴唇的干裂。每天累到倒头就睡，早上又被冻醒。</p>
-    <p><strong>但我想再去一次。</strong></p>
-    <p>因为在那三天里，我第一次真正安静下来。没有手机震动，没有消息提醒，没有"在吗"和"收到请回复"。只有风声、脚步声和自己心跳的声音。</p>
-    <p>三毛在撒哈拉的时候说：<em>"生命的过程，无论是阳春白雪，青菜豆腐，我都得尝尝是什么滋味。"</em></p>
-    <p>我想，我理解她了。</p>
-    <p>沙漠教会我最重要的事——<strong>你不需要征服什么，你只需要走过去。</strong>走过去，然后你会发现，自己比自己以为的更结实，世界比自己以为的更辽阔。</p>
-    <p>这，就是"四郎带你探索"的意义。</p>
-    <p>不是告诉你哪里好玩，不是给你一份攻略。而是想让你知道：<em>有些路，值得你亲自去走。</em></p>
-  </div>
-</section>
 
-<!-- ═══ ENDING ═══ -->
-<div class="sq fi">
-  <div class="sq-text"><em>我们翻越的不只是沙丘，</em><br>更是心里的那座山。</div>
-</div>
+</main>
 
-<section class="end fi">
-  <div class="end-text">下一站，四郎带你<em>继续出发</em></div>
-  <div class="end-sig">腾格里 · 2026 清明</div>
-</section>
-
-<footer class="ft">
-  <div class="ft-brand">四郎带你探索</div>
-  <div class="ft-sub">风 · 沙 · 星 · 路 &nbsp;|&nbsp; 此行，无憾</div>
-</footer>
-
-<script>
-window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('ld').classList.add('out')},600)});
-const obs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('vis')})},{threshold:.06,rootMargin:'0px 0px -20px 0px'});
-document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
-let t=false;
-window.addEventListener('scroll',()=>{if(!t){requestAnimationFrame(()=>{const y=window.pageYOffset;const bg=document.querySelector('.cover-bg img');if(bg)bg.style.transform='scale('+(1+y*.0001)+') translateY('+y*.12+'px)';t=false})}t=true},{passive:true});
-</script>
 </body>
 </html>
